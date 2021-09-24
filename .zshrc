@@ -109,7 +109,7 @@ autoload -U compinit && compinit
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vi'
 else
-  export EDITOR='vim'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
