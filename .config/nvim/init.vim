@@ -22,17 +22,16 @@ set clipboard=unnamedplus
 
 lua require('plugins')
 
-
 "colorscheme github_dark
 "au ColorScheme * hi Normal ctermbg=none guibg=none
 nnoremap <expr> <C-p> (len(system('git rev-parse')) ? ':Files' : ':GFiles --exclude-standard --others --cached')."\<cr>"
 
+nmap ghs <Plug>(GitGutterStageHunk)
+nmap ghu <Plug>(GitGutterUndoHunk)
+nmap ghp <Plug>(GitGutterPreviewHunk)
 
-"let delimitMate_expand_cr = 1
 
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<cr>"
-"ino <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-          "\: "\<C-R>=delimitMate#ExpandReturn()\<CR>"
 
 "vim-fswitch
 autocmd BufEnter *fmr/src/*.cpp let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = 'reg:|src|include/fmr|'
@@ -63,5 +62,3 @@ augroup autoformat_settings
   autocmd FileType rust AutoFormatBuffer rustfmt
   autocmd FileType vue AutoFormatBuffer prettier
 augroup END
-
-
