@@ -148,5 +148,12 @@ return require('packer').startup(function(use)
     'tpope/vim-eunuch'
   }
 
+  use {
+    'SirVer/ultisnips'
+  }
+
+  use {
+    'honza/vim-snippets'
+  }
 
 end)
