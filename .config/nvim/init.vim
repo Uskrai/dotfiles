@@ -1,8 +1,7 @@
 
 set number relativenumber
 
-set signcolumn=number
-"set signcolumn=yes
+set signcolumn=yes
 
 set linebreak
 
