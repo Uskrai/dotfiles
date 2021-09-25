@@ -29,9 +29,6 @@ nmap ghs <Plug>(GitGutterStageHunk)
 nmap ghu <Plug>(GitGutterUndoHunk)
 nmap ghp <Plug>(GitGutterPreviewHunk)
 
-
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<cr>"
-
 "vim-fswitch
 autocmd BufEnter *fmr/src/*.cpp let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = 'reg:|src|include/fmr|'
 autocmd BufEnter *fmr/include/fmr/*.h let b:fswitchdst = 'cpp,c' | let b:fswitchlocs = 'reg:|include/fmr|src|'
@@ -45,6 +42,10 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit"
 
 let g:rainbow_active = 1
+
+let g:delimitMate_expand_cr = 1
+let g:delimitMate_expand_space = 1
+let g:delimitMate_balance_matchpair = 1
 
 augroup autoformat_settings
   autocmd FileType bzl AutoFormatBuffer buildifier
