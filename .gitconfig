@@ -6,3 +6,8 @@
 [user]
 	email = 30656271+Uskrai@users.noreply.github.com
 	name = Muhammad Fathurrohim
+
+[diff]
+	tool = nvimdiff
+[difftool "nvimdiff"]
+	cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
