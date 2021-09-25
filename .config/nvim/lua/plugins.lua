@@ -139,8 +139,9 @@ return require('packer').startup(function(use)
   use {
     'airblade/vim-gitgutter'
   }
+
   use {
-    'jiangmiao/auto-pairs'
+    'Raimondi/delimitMate'
   }
 
 
