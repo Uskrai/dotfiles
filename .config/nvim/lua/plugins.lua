@@ -144,5 +144,9 @@ return require('packer').startup(function(use)
     'Raimondi/delimitMate'
   }
 
+  use {
+    'tpope/vim-eunuch'
+  }
+
 
 end)
