@@ -1,0 +1,8 @@
+[init]
+	defaultBranch = master
+[core]
+	fileMode = false
+	editor = nvim
+[user]
+	email = 30656271+Uskrai@users.noreply.github.com
+	name = Muhammad Fathurrohim
