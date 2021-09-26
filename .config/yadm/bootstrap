@@ -7,6 +7,16 @@ cd "$HOME"
 echo "Init submodules"
 yadm submodule update --recursive --init
 
-sudo pacman -S nvim alacritty zsh picom
+INSTALL_PACMAN="
+  neovim # code editor
+  alacritty # terminal
+  zsh # shell
+  picom # windows compositor
+  maim # screenshot
+  exa # ls replacement
+  dunst # notification
+"
+
+sudo pacman -S $INSTALL_PACMAN
 
 ZSH=~/.local/share/oh-my-zsh sh "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
