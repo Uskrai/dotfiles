@@ -15,6 +15,7 @@ INSTALL_PACMAN="
   maim # screenshot
   exa # ls replacement
   dunst # notification
+  playerctl # play-pause, stop,next and prev button
 "
 
 sudo pacman -S $INSTALL_PACMAN
