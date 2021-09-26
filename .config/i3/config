@@ -195,9 +195,10 @@ exec --no-startup-id ~/script/autostart.sh
 exec_always xautolock -time 2 -locker ~/script/lock-screen.sh
 bindsym --release $mod+Ctrl+l exec xautolock -locknow
 bindsym --release $mod+Mod1+l exec ~/script/rofi-lock-screen-mode.sh
-# bindsym --release Print exec ~/script/lock-screen.sh
-bindsym --release Print exec scrot -e 'mv $f ~/Pictures/$f'
-bindsym --release Shift+Print exec scrot -s -e 'mv $f ~/Pictures/$f'
+
+# scerenshot
+bindsym --release Print exec maim | tee ~/Pictures/$(date +%Y-%m-%d-%H:%M:%S:%N)_maim.png | xclip -selection clipboard -t image/png
+bindsym --release Shift+Print exec maim -s | tee ~/Pictures/$(date +%Y-%m-%d-%H:%M:%S:%N)_maim.png | xclip -selection clipboard -t image/png
 bindsym $mod+Tab focus right
 bindsym $mod+Shift+Tab focus left
 
