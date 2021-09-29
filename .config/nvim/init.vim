@@ -27,6 +27,9 @@ lua require('plugins')
 "au ColorScheme * hi Normal ctermbg=none guibg=none
 nnoremap <expr> <C-p> (len(system('git rev-parse')) ? ':Files' : ':GFiles --exclude-standard --others --cached')."\<cr>"
 
+
+inoremap <silent><expr> <C-space> coc#refresh()
+
 nmap ghs <Plug>(GitGutterStageHunk)
 nmap ghu <Plug>(GitGutterUndoHunk)
 nmap ghp <Plug>(GitGutterPreviewHunk)
