@@ -18,6 +18,8 @@ set backspace=indent,eol,start
 set mouse=a
 set clipboard=unnamedplus
 
+let g:rust_recommended_style = 0
+
 
 lua require('plugins')
 
