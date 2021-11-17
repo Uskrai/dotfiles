@@ -1,9 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -87,10 +81,8 @@ plugins=(
   fzf-tab
   extract
   cp
-  archlinux
   colored-man-pages
   rsync
-  systemd
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -112,6 +104,13 @@ else
   export EDITOR='nvim'
 fi
 
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -127,8 +126,10 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+fpath+=~/.zfunc
+
 PATH=$HOME/bin:/usr/local/bin:/home/uskrai/.local/share/gem/ruby/2.7.0/bin:$PATH
-export PATH=$HOME/.config/composer/vendor/bin:$HOME/.local/bin/:$PATH
+export PATH=$HOME/.yarn/bin/:$HOME/.config/composer/vendor/bin:$HOME/.local/bin/:$PATH
 
 eval "$(mcfly init zsh)"
 alias ls="exa --icons --group-directories-first"
@@ -143,3 +144,13 @@ alias joinpdf="gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite"
 alias foldervimtotml="~/script/folder_vim_to_html.sh"
 alias qemu=qemu-system-x86_64
 
+# History Configuration
+HISTSIZE=500000
+SAVEHIST=500000
+setopt appendhistory
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+
+source ~/.profile
+
+eval "$(zoxide init zsh)"

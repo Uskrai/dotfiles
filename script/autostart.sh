@@ -1,7 +1,6 @@
 
 dunst &
 nitrogen --restore &
-brightnessctl set 10 &
 
 # applet
 blueman-applet &
@@ -17,3 +16,5 @@ xset s 0 0
 xset dpms 0 0 0
 
 picom &
+
+pulseaudio &!
