@@ -50,6 +50,7 @@ bindsym $mod+Return exec kitty
 
 # kill focused window
 bindsym $mod+Shift+q exec ~/script/kill.sh
+bindsym $mod+Shift+Ctrl+q exec i3-msg kill
 # bindsym $mod+Shift+q [class="urxvt"] nop
 
 # start dmenu (a program launcher)
