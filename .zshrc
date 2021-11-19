@@ -154,3 +154,7 @@ setopt SHARE_HISTORY
 source ~/.profile
 
 eval "$(zoxide init zsh)"
+
+bindkey -r '^[c'
+# bindkey -r <M-c>
+#
