@@ -21,6 +21,8 @@ set clipboard=unnamedplus
 
 set sessionoptions+=resize,winpos,terminal
 
+set foldmethod=syntax
+
 let g:rust_recommended_style = 0
 
 
