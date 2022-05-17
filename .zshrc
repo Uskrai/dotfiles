@@ -129,13 +129,16 @@ fi
 fpath+=~/.zfunc
 
 PATH=$HOME/bin:/usr/local/bin:/home/uskrai/.local/share/gem/ruby/2.7.0/bin:$PATH
-export PATH=$HOME/.yarn/bin/:$HOME/.config/composer/vendor/bin:$HOME/.local/bin/:$PATH
+PATH=$HOME/.yarn/bin/:$HOME/.config/composer/vendor/bin:$HOME/.local/bin/:$PATH
+export PATH=/opt/clang-format-static/:$PATH
 
 eval "$(mcfly init zsh)"
 alias ls="exa --icons --group-directories-first"
 alias enable-mic="~/script/mic_over_mumble.sh"
 alias toggle-touchpad="~/script/toggle_touchpad.sh"
 alias zip-folder="~/script/zip.sh"
+alias locate-dling="slocate -d ~/.mlocate-dling"
+alias idea="_JAVA_AWT_WM_NONREPARENTING=1 intellij-idea-ultimate-edition"
 
 export LD_LIBRARY_PATH="/usr/local/lib:/usr/lib"
 
@@ -143,6 +146,16 @@ alias joinpdf="gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite"
 
 alias foldervimtotml="~/script/folder_vim_to_html.sh"
 alias qemu=qemu-system-x86_64
+
+function cdzsh {
+  add-zsh-hook -D chpwd chpwd_last_working_dir
+  cd $1
+  add-zsh-hook chpwd chpwd_last_working_dir
+}
+
+alias mado="cdzsh ~/manga/relm/bin/; RUST_LOG=mado_engine=trace ./mado-relm; cdzsh -"
+alias fmr="cdzsh ~/e/project/c++/fmr/build_rewrite; ./fmr; cdzsh -"
+alias fmrdj="cdzsh ~/e/project/c++/fmr/build_rewrite; FMR_PROFILE=dj ./fmr; cdzsh -"
 
 # History Configuration
 HISTSIZE=500000
@@ -153,8 +166,15 @@ setopt SHARE_HISTORY
 
 source ~/.profile
 
+# eval "$(diesel completions zsh)"
 eval "$(zoxide init zsh)"
 
 bindkey -r '^[c'
 # bindkey -r <M-c>
 #
+
+export GPG_TTY=$(tty)
+export PINENTRY_USER_DATA=USE_TTY=1
+export WINEPREFIX="/mnt/g/uskrai/wine"
+
+unsetopt caseglob

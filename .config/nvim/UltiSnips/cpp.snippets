@@ -21,9 +21,15 @@ def write_docstring_args(arglist, snip):
 
 endglobal
 
-snippet ifndef "include guard" w
-ifndef ${1:`!p snip.rv=str(path).replace('/','_').replace('\\','_').replace('.','_').replace('-','_').upper()+'_'`}
+snippet #ifndef "include guard" w
+ifndef ${1:`!p 
+path = os.path.relpath(path)
+
+snip.rv=str(path).replace('/','_').replace('\\','_').replace('.','_').replace('-','_').upper()+'_'
+`}
 #define $1
+`!p 
+`
 
 $0
 

@@ -1,23 +1,34 @@
 {
-  "suggest.noselect": true,
-  "languageserver": {
-    "ccls" : {
-      "command": "ccls",
-      "filetypes": ["c","cc","cpp","c++","objc","objcpp"],
-      "rootPatterns": [".ccls","compile_commands.json",".git/",".hg/"],
-      "initializationOptions": {
-        "cache" : {
-          "directory" : "/tmp/ccls/"
-        },
-        "highlight" : {
-          "lsRanges" : true
-        }
-      }
+    "diagnostic.virtualText": true,
+    // "diagnostic.virtualText": true,
+    "suggest.noselect": true,
+    "rust-analyzer.server.path": "/usr/bin/rust-analyzer",
+    "rust-analyzer.updates.checkOnStartup": true,
+    "rust-analyzer.completion.addCallParenthesis": false,
+    "rust-analyzer.completion.postfix.enable": false,
+    "rust-analyzer.inlayHints.typeHints": true,
+    // "rust-analyzer.inlayHints.closureReturnTypeHints": true,
+    "rust-analyzer.inlayHints.reborrowHints": true,
+    "clangd.inlayHints.enable": true,
+
+    "clangd.disableSnippetCompletion": true,
+    // "clangd.disableCompletion": true,
+
+    "languageserver": {
+        // "kotlin": {
+        //     "command": "/usr/bin/kotlin-language-server",
+        //     "filetypes": ["kotlin"]
+        // }
+        // "ccls": {
+        // "command": "ccls",
+        // "filetypes": ["c", "h", "cc", "cpp", "c++", "objc", "objcpp"],
+        // "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
+        // "initializationOptions": {
+        //     "highlight": { "lsRanges" : true },
+        //     "cache": {
+        //       "directory": "/tmp/ccls"
+        //     }
+        //   }
+        // }
     }
-  },
-  "rust-analyzer.server.path": "/usr/bin/rust-analyzer",
-  "rust-analyzer.updates.checkOnStartup": true,
-  "rust-analyzer.completion.addCallParenthesis": false,
-  "rust-analyzer.completion.postfix.enable": false,
-  "rust-analyzer.checkOnSave.command": "clippy"
 }

@@ -17,4 +17,5 @@ xset dpms 0 0 0
 
 picom &
 
-pulseaudio &!
+# pulseaudio &!
+~/script/change-wallpaper.sh

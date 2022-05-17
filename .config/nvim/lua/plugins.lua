@@ -51,21 +51,59 @@ return require('packer').startup(function(use)
         run = function() vim.fn['firenvim#install'](0) end
     }
 
+    use { 
+        'udalov/kotlin-vim' 
+    }
+
     -- use {
     -- 'vim-airline/vim-airline'
     -- }
 
-    use {
-        'airblade/vim-gitgutter'
-    }
     -- Use dependency and run lua function after load
-    -- use {
-    --     'lewis6991/gitsigns.nvim',
-    --     requires = {'nvim-lua/plenary.nvim'},
-    --     config = function()
-    --         require('gitsigns').setup()
-    --     end
-    -- }
+    use {
+        'lewis6991/gitsigns.nvim',
+        requires = {'nvim-lua/plenary.nvim'},
+        -- config = function()
+        --     require("gitsigns").setup()
+        -- end
+        config = function()
+            require('gitsigns').setup {
+                debug_mode = true,
+                yadm = {
+                    enable = true
+                },
+                on_attach = function(bufnr)
+                    local function map(mode, lhs, rhs, opts)
+                        opts = vim.tbl_extend('force', {noremap = true, silent = true}, opts or {})
+                        vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
+                    end
+
+                    -- Navigation
+                    map('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", {expr=true})
+                    map('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", {expr=true})
+
+                    -- Actions
+                    map('n', '<leader>hs', ':Gitsigns stage_hunk<CR>')
+                    map('v', '<leader>hs', ':Gitsigns stage_hunk<CR>')
+                    map('n', '<leader>hr', ':Gitsigns reset_hunk<CR>')
+                    map('v', '<leader>hr', ':Gitsigns reset_hunk<CR>')
+                    map('n', '<leader>hS', '<cmd>Gitsigns stage_buffer<CR>')
+                    map('n', '<leader>hu', '<cmd>Gitsigns undo_stage_hunk<CR>')
+                    map('n', '<leader>hR', '<cmd>Gitsigns reset_buffer<CR>')
+                    map('n', '<leader>hp', '<cmd>Gitsigns preview_hunk<CR>')
+                    map('n', '<leader>hb', '<cmd>lua require"gitsigns".blame_line{full=true}<CR>')
+                    map('n', '<leader>tb', '<cmd>Gitsigns toggle_current_line_blame<CR>')
+                    map('n', '<leader>hd', '<cmd>Gitsigns diffthis<CR>')
+                    map('n', '<leader>hD', '<cmd>lua require"gitsigns".diffthis("~")<CR>')
+                    map('n', '<leader>td', '<cmd>Gitsigns toggle_deleted<CR>')
+
+                    -- Text object
+                    map('o', 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+                    map('x', 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+                end
+            }
+        end
+    }
 
 
     use {'sindrets/diffview.nvim'}
@@ -83,8 +121,8 @@ return require('packer').startup(function(use)
     -- use {'Raimondi/delimitMate'}
 
     -- auto expand
-    -- use {'uskrai/vim-closer'}
-    -- use {'tpope/vim-endwise'}
+    use {'rstacruz/vim-closer'}
+    use {'tpope/vim-endwise'}
 
     use {'tpope/vim-fugitive'}
     use {'tpope/vim-repeat'}
@@ -92,8 +130,8 @@ return require('packer').startup(function(use)
     -- comment
     -- use {'preservim/nerdcommenter'}
     use {
-        'numToStr/Comment.nvim',
-        config = function() require('Comment').setup() end
+     'numToStr/Comment.nvim',
+      config = function() require('Comment').setup() end
     }
 
     -- LSP
@@ -107,32 +145,57 @@ return require('packer').startup(function(use)
         "hoob3rt/lualine.nvim",
         config = function()
             require("lualine").setup {
-                options = {theme = "github"},
+                options = {theme = "ayu"},
                 sections = {
                     lualine_c = {
-                        'filename',
-                        'g:coc_status'
+                        {
+                            'filename',
+                            path = 1
+                            
+                        },
+                        "g:coc_status"
                     }
                 }
             }
         end
     }
+    use 'joshdick/onedark.vim'
+    use 'sainnhe/everforest'
+    use 'ayu-theme/ayu-vim'
+    use 'drewtempelmeyer/palenight.vim'
+    use 'sainnhe/sonokai'
+    use 'tomasr/molokai'
+    use 'morhetz/gruvbox'
+    use 'sainnhe/edge'
+    use 'dikiaap/minimalist'
+    use 'cocopon/iceberg.vim'
+    -- use 'sainnhe/gruvbox-material' // no transparent background on EOL
+    use 'kaicataldo/material.vim'
 
     use {
-        "projekt0n/github-nvim-theme",
-        config = function()
-            require("github-theme").setup({
-                -- theme_style = "dark",
-                transparent = true
-
-            })
-            -- require("github-theme").setup()
-            -- require("github-theme").setup({
-            --     theme_style = "dark_default",
-            --     transparent = true
-            -- })
-        end
+        'arcticicestudio/nord-vim'
     }
+
+    -- use {
+    --     'kdheepak/tabline.nvim',
+    --     config = function()
+    --         require'tabline'.setup {
+    --             enable = true
+    --         }
+    --     end
+    -- }
+    -- use {
+    --     'dracula/vim'
+    -- }
+    -- use {
+    --     "projekt0n/github-nvim-theme",
+    --     config = function()
+    --         require("github-theme").setup({
+    --             transparent = true
+    --
+    --         })
+    --     end
+    -- }
 
     use {'lukas-reineke/indent-blankline.nvim'}
     -- }}
@@ -152,6 +215,8 @@ return require('packer').startup(function(use)
 
     use {'luochen1990/rainbow'}
 
+    -- use { 'google/vim-glaive', requires = {'google/vim-maktaba'} }
+
     use {
         'google/vim-codefmt',
         requires = {'google/vim-maktaba', 'google/vim-glaive'}
@@ -159,20 +224,23 @@ return require('packer').startup(function(use)
 
     use {'andrejlevkovitch/vim-lua-format'}
 
-    use {'raymond-w-ko/vim-lua-indent'}
+    -- use {'raymond-w-ko/vim-lua-indent'}
 
     use {
-        'nvim-telescope/telescope.nvim', require"telescope".setup {
-            extensions = {
-                frecency = {
-                    show_unindexed = true,
-                    show_scores = true,
-                    sorter = require"telescope".extensions.fzf
-                        .native_fzf_sorter()
-                }
-            }
-        }
-
+        'nvim-telescope/telescope.nvim', 
+        requires = { {'nvim-lua/plenary.nvim' } },
+        config = function() 
+          require"telescope".setup {
+              extensions = {
+                  frecency = {
+                      show_unindexed = true,
+                      show_scores = true,
+                      sorter = require"telescope".extensions.fzf
+                          .native_fzf_sorter()
+                  }
+              }
+          }
+        end
     }
 
     use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
@@ -188,7 +256,12 @@ return require('packer').startup(function(use)
 
     use {'tpope/vim-eunuch'}
 
-    use {'rmagatti/auto-session'}
+    use {
+        'rmagatti/auto-session',
+        config = function()
+            vim.o.sessionoptions="blank,buffers,curdir,folds,help,options,tabpages,winsize,resize,winpos,terminal"
+        end
+    }
 
     use {'romgrk/barbar.nvim', requires = 'kyazdani42/nvim-web-devicons'}
 
@@ -197,4 +270,18 @@ return require('packer').startup(function(use)
     use 'andweeb/presence.nvim'
 
     use 'tpope/vim-sleuth'
+
+    use 'Konfekt/FastFold'
+    use {
+        'Iron-E/rust.vim',
+        branch = "feature/struct-definition-identifiers"
+    }
+
+    use { 
+        'dinhhuy258/vim-local-history',
+        run = ":UpdateRemotePlugins"
+    }
+
+    use "othree/xml.vim"
+    -- use 'rust-lang/rust.vim'
 end)

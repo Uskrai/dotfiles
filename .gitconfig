@@ -4,10 +4,13 @@
 	fileMode = false
 	editor = nvim
 [user]
-	email = 30656271+Uskrai@users.noreply.github.com
+	email = m.faturrohim13@gmail.com
 	name = Muhammad Fathurrohim
+	signingkey = BE8753E8DE8C41DF
 
 [diff]
 	tool = nvimdiff
 [difftool "nvimdiff"]
 	cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[commit]
+	gpgsign = true

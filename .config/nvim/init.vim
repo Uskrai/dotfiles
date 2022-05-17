@@ -21,12 +21,15 @@ set clipboard=unnamedplus
 
 set sessionoptions+=resize,winpos,terminal
 
-set foldmethod=syntax
+" set foldmethod=syntax
 
 let g:rust_recommended_style = 0
 
+set termguicolors
 
-lua require('plugins')
+lua require("plugins")
+
+let g:rust_fold = 1
 
 " colorscheme github_dark
 
@@ -70,6 +73,7 @@ let g:polyglot_disabled = [
 augroup autoformat_settings
   autocmd FileType bzl AutoFormatBuffer buildifier
   autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+  autocmd FileType c,cpp,proto,javascript,arduino Glaive codefmt clang_format_executable='clang-format-14'
   autocmd FileType dart AutoFormatBuffer dartfmt
   autocmd FileType go AutoFormatBuffer gofmt
   autocmd FileType gn AutoFormatBuffer gn
@@ -150,12 +154,62 @@ augroup coc
   nmap <silent> gi <Plug>(coc-implementation)
   nmap <silent> gr <Plug>(coc-references)
   nmap <leader>rn <Plug>(coc-rename)
+
+  xmap <leader>A <Plug>(coc-codeaction-selected)
+  nmap <leader>A <Plug>(coc-codeaction-selected)
+
+  nmap <leader>a <Plug>(coc-codeaction-cursor)
 augroup END
 
 
 let g:lexima_enable_basic_rules = 0
 let g:lexima_enable_newline_rules = 1
 
-colorscheme github_dark
+function MakeTransparent()
+  highlight clear CursorLine
+  highlight clear EndOfBuffer
+  highlight Normal ctermbg=none
+  highlight LineNr ctermbg=none
+  highlight Folded ctermbg=none
+  highlight NonText ctermbg=none
+  highlight SpecialKey ctermbg=none
+  highlight VertSplit ctermbg=none
+  highlight SignColumn ctermbg=none
+  hi Normal guibg=NONE ctermbg=NONE
+  " hi BufferCurrent guifg=#FFFF00
+  " hi BufferInactive guifg=#888888 guibg=#000000
+  " hi BufferInactiveTarget guibg=#000000
+  " hi BufferInactiveIndex guibg=#000000
+  " hi BufferInactiveSign guibg=#000000
+endfunction
+
+" transparent bg
+autocmd vimenter * call MakeTransparent()
+autocmd ColorScheme * call MakeTransparent()
+
 autocmd VimEnter * highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 autocmd VimEnter * match OverLength /\%81v.\+/
+" autocmd BufNewFile,BufRead * match OverLength /\%81v.\+/
+autocmd BufNewFile,BufRead *.rs match OverLength /\%101v.\+/
+
+colorscheme material
+
+function SetupRust()
+  set tabstop=4
+  set shiftwidth=4
+  set softtabstop=4
+endfunction
+
+autocmd BufNewFile,BufRead *.rs,*.rn,*.xml call SetupRust()
+
+function SetupLatex()
+  set tw=80
+endfunction
+
+let loaded_netrwPlugin = 1
+let g:vimtex_quickfix_open_on_warning = 0
+
+autocmd BufNewFile,BufRead *.tex call SetupLatex()
+
+let g:local_history_new_change_delay = 30
+let g:local_history_max_changes = 100000
