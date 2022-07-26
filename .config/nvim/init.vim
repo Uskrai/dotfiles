@@ -28,6 +28,7 @@ let g:rust_recommended_style = 0
 set termguicolors
 
 lua require("plugins")
+lua require("treesitter")
 lua require("comment")
 
 let g:rust_fold = 1
