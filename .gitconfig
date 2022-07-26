@@ -14,3 +14,7 @@
 	cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [commit]
 	gpgsign = true
+[safe]
+	directory = .
+	directory = /mnt/e/project/pbo/Tubes
+	directory = /mnt/e/project/pascal/FMD2

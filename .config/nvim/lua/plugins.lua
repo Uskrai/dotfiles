@@ -51,10 +51,6 @@ return require('packer').startup(function(use)
         run = function() vim.fn['firenvim#install'](0) end
     }
 
-    use { 
-        'udalov/kotlin-vim' 
-    }
-
     -- use {
     -- 'vim-airline/vim-airline'
     -- }
@@ -133,6 +129,8 @@ return require('packer').startup(function(use)
      'numToStr/Comment.nvim',
       config = function() require('Comment').setup() end
     }
+
+    use 'preservim/nerdtree'
 
     -- LSP
     use {'neoclide/coc.nvim', run = {'yarn install --frozen-lockfile'}}
@@ -272,16 +270,24 @@ return require('packer').startup(function(use)
     use 'tpope/vim-sleuth'
 
     use 'Konfekt/FastFold'
-    use {
-        'Iron-E/rust.vim',
-        branch = "feature/struct-definition-identifiers"
-    }
 
     use { 
         'dinhhuy258/vim-local-history',
         run = ":UpdateRemotePlugins"
     }
 
+
     use "othree/xml.vim"
-    -- use 'rust-lang/rust.vim'
+
+    use {
+        'Iron-E/rust.vim',
+        branch = "feature/struct-definition-identifiers"
+    }
+
+    use {
+        "udalov/kotlin-vim"
+    }
+    use 'RustemB/sixtyfps-vim'
+
+    use 'stephpy/vim-php-cs-fixer'  
 end)
