@@ -2,7 +2,8 @@
     "diagnostic.virtualText": true,
     // "diagnostic.virtualText": true,
     "suggest.noselect": true,
-    "rust-analyzer.server.path": "/usr/bin/rust-analyzer",
+    "rust-analyzer.server.path": "/home/uskrai/.cargo/bin/ra-multiplex",
+    // "rust-analyzer.server.path": "/usr/bin/rust-analyzer",
     "rust-analyzer.updates.checkOnStartup": true,
     "rust-analyzer.completion.callable.snippets": "fill_arguments",
     // "rust-analyzer.completion.addCallParenthesis": false,
@@ -37,6 +38,14 @@
           "command": "csharp-ls",
           "filetypes": ["cs"],
           "rootPatterns": ["*.csproj", ".vim/", ".git/", ".hg/"]
+        },
+        "slint": {
+          "command": "ra-multiplex",
+          "args": [
+            "--ra-mux-server",
+            "slint-lsp"
+          ],
+          "filetypes": ["slint"]
         }
     }
 }
