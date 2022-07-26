@@ -44,6 +44,9 @@ return require('packer').startup(function(use)
 
     -- Post-install/update hook with neovim command
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use { 'JoosepAlviste/nvim-ts-context-commentstring', run = ':TSUpdate' }
+    use { 'nvim-treesitter/nvim-treesitter-context', run = ':TSUpdate' }
+    use { 'nvim-treesitter/playground', run = ':TSUpdate' }
 
     -- Post-install/update hook with call of vimscript function with argument
     use {
@@ -135,7 +138,6 @@ return require('packer').startup(function(use)
      'numToStr/Comment.nvim',
       config = function() require('Comment').setup() end
     }
-    use { 'JoosepAlviste/nvim-ts-context-commentstring' }
 
     use 'preservim/nerdtree'
 
