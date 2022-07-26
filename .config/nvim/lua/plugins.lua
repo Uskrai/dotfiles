@@ -117,8 +117,14 @@ return require('packer').startup(function(use)
     -- use {'Raimondi/delimitMate'}
 
     -- auto expand
-    use {'rstacruz/vim-closer'}
-    use {'tpope/vim-endwise'}
+    -- use {'rstacruz/vim-closer'}
+    -- use {'tpope/vim-endwise', after="vim-closer"}
+    use {'tpope/vim-eunuch'}
+    use { 
+        'windwp/nvim-autopairs' ,
+        config = function() require("nvim-autopairs").setup {} end
+    }
+    -- use { 'neoclide/coc-pairs' }
 
     use {'tpope/vim-fugitive'}
     use {'tpope/vim-repeat'}
@@ -135,7 +141,6 @@ return require('packer').startup(function(use)
 
     -- LSP
     use {'neoclide/coc.nvim', run = {'yarn install --frozen-lockfile'}}
-    use {'gluon-lang/vim-gluon'}
     -- }}Editing
 
     -- Appereance{{
@@ -172,7 +177,8 @@ return require('packer').startup(function(use)
     use 'kaicataldo/material.vim'
 
     use {
-        'arcticicestudio/nord-vim'
+        'arcticicestudio/nord-vim',
+        branch = "main"
     }
 
     -- use {
@@ -198,7 +204,7 @@ return require('packer').startup(function(use)
 
     use {'lukas-reineke/indent-blankline.nvim'}
     -- }}
-
+    use 'editorconfig/editorconfig-vim'
     use {
         'junegunn/fzf.vim',
         requires = {'junegunn/fzf', run = {'fzf#install()'}}
@@ -253,7 +259,6 @@ return require('packer').startup(function(use)
     use {'lervag/vimtex'}
     -- }} document reading
 
-    use {'tpope/vim-eunuch'}
 
     use {
         'rmagatti/auto-session',
@@ -276,9 +281,6 @@ return require('packer').startup(function(use)
         'dinhhuy258/vim-local-history',
         run = ":UpdateRemotePlugins"
     }
-
-
-    use "othree/xml.vim"
 
     use {
         'Iron-E/rust.vim',

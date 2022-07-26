@@ -22,8 +22,15 @@ set clipboard=unnamedplus
 set sessionoptions+=resize,winpos,terminal
 
 " set foldmethod=syntax
+" set foldmethod=expr
+" set foldexpr=nvim_treesitter#foldexpr()
 
 let g:rust_recommended_style = 0
+
+let g:polyglot_disabled = [
+      \ 'autoindent', 
+      \ 'rust',
+  \ ]
 
 set termguicolors
 
@@ -67,19 +74,15 @@ let g:delimitMate_expand_cr = 1
 let g:delimitMate_expand_space = 1
 let g:delimitMate_balance_matchpair = 1
 
-let g:polyglot_disabled = [
-      \ 'autoindent', 
-      \ 'rust', 
-  \ ]
-
 augroup autoformat_settings
   autocmd FileType bzl AutoFormatBuffer buildifier
-  autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
-  autocmd FileType c,cpp,proto,javascript,arduino Glaive codefmt clang_format_executable='clang-format-14'
+  autocmd FileType c,cpp,proto,arduino AutoFormatBuffer clang-format
+  autocmd FileType c,cpp,proto,arduino Glaive codefmt clang_format_executable='clang-format-14'
   autocmd FileType dart AutoFormatBuffer dartfmt
   autocmd FileType go AutoFormatBuffer gofmt
   autocmd FileType gn AutoFormatBuffer gn
-  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer prettier
+  " autocmd FileType javascript eslint
+  " autocmd FileType html,css,sass,scss,less,json,javascript AutoFormatBuffer prettier
   "" autocmd FileType java AutoFormatBuffer google-java-format
   "" autocmd FileType java autocmd BufLeave * :FormatCode
 
@@ -144,7 +147,14 @@ autocmd BufNewFile,BufRead *.rn
   \ :set formatoptions=croqnlj |
   \ :set comments="s0:/*!,m: ,ex:*/,s1:/*,mb:*,ex:*/,:///,://!,://"
 
+
 autocmd FileType rune
+  \ let b:closer = 1 |
+  \ let b:closer_flags = '([{' 
+
+autocmd BufEnter *.slint :setlocal filetype=slint
+
+autocmd FileType slint
   \ let b:closer = 1 |
   \ let b:closer_flags = '([{' 
 
@@ -189,10 +199,10 @@ endfunction
 autocmd vimenter * call MakeTransparent()
 autocmd ColorScheme * call MakeTransparent()
 
-autocmd VimEnter * highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-autocmd VimEnter * match OverLength /\%81v.\+/
+" autocmd VimEnter * highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+" autocmd VimEnter * match OverLength /\%81v.\+/
 " autocmd BufNewFile,BufRead * match OverLength /\%81v.\+/
-autocmd BufNewFile,BufRead *.rs match OverLength /\%101v.\+/
+" autocmd BufNewFile,BufRead *.rs match OverLength /\%101v.\+/
 
 colorscheme material
 
@@ -215,3 +225,4 @@ autocmd BufNewFile,BufRead *.tex call SetupLatex()
 
 let g:local_history_new_change_delay = 30
 let g:local_history_max_changes = 100000
+let g:local_history_path = $HOME . '/.local-history'

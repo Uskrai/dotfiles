@@ -130,7 +130,10 @@ fpath+=~/.zfunc
 
 PATH=$HOME/bin:/usr/local/bin:/home/uskrai/.local/share/gem/ruby/2.7.0/bin:$PATH
 PATH=$HOME/.yarn/bin/:$HOME/.config/composer/vendor/bin:$HOME/.local/bin/:$PATH
-export PATH=/opt/clang-format-static/:$PATH
+PATH=/opt/clang-format-static/:$PATH
+
+export DENO_INSTALL="/home/uskrai/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
 
 eval "$(mcfly init zsh)"
 alias ls="exa --icons --group-directories-first"
@@ -154,8 +157,8 @@ function cdzsh {
 }
 
 alias mado="cdzsh ~/manga/relm/bin/; RUST_LOG=mado_engine=trace ./mado-relm; cdzsh -"
-alias fmr="cdzsh ~/e/project/c++/fmr/build_rewrite; ./fmr; cdzsh -"
-alias fmrdj="cdzsh ~/e/project/c++/fmr/build_rewrite; FMR_PROFILE=dj ./fmr; cdzsh -"
+# alias fmr="cdzsh ~/e/project/c++/fmr/build_rewrite; ./fmr; cdzsh -"
+# alias fmrdj="cdzsh ~/e/project/c++/fmr/build_rewrite; FMR_PROFILE=dj ./fmr; cdzsh -"
 
 # History Configuration
 HISTSIZE=500000
