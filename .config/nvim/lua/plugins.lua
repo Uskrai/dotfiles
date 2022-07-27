@@ -47,6 +47,7 @@ return require('packer').startup(function(use)
     use { 'JoosepAlviste/nvim-ts-context-commentstring', run = ':TSUpdate' }
     use { 'nvim-treesitter/nvim-treesitter-context', run = ':TSUpdate' }
     use { 'nvim-treesitter/playground', run = ':TSUpdate' }
+    use { 'SmiteshP/nvim-navic' }
 
     -- Post-install/update hook with call of vimscript function with argument
     use {
@@ -142,28 +143,26 @@ return require('packer').startup(function(use)
     use 'preservim/nerdtree'
 
     -- LSP
-    use {'neoclide/coc.nvim', run = {'yarn install --frozen-lockfile'}}
+    -- use {'neoclide/coc.nvim', run = {'yarn install --frozen-lockfile'}}
+    use { 'neovim/nvim-lspconfig' }
+    use { 
+        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    }
+    -- use { 'ms-jpq/coq_nvim' }
+    use { 'hrsh7th/cmp-nvim-lsp' }
+    use { 'hrsh7th/nvim-cmp' }
     -- }}Editing
 
-    -- Appereance{{
 
+    -- Appereance{{
+    use {
+        'nvim-lua/lsp-status.nvim',
+        config = function()
+            require('lsp-status').register_progress()
+        end
+    }
     use {
         "hoob3rt/lualine.nvim",
-        config = function()
-            require("lualine").setup {
-                options = {theme = "ayu"},
-                sections = {
-                    lualine_c = {
-                        {
-                            'filename',
-                            path = 1
-                            
-                        },
-                        "g:coc_status"
-                    }
-                }
-            }
-        end
     }
     use 'joshdick/onedark.vim'
     use 'sainnhe/everforest'
@@ -236,25 +235,12 @@ return require('packer').startup(function(use)
     use {
         'nvim-telescope/telescope.nvim', 
         requires = { {'nvim-lua/plenary.nvim' } },
-        config = function() 
-          require"telescope".setup {
-              extensions = {
-                  frecency = {
-                      show_unindexed = true,
-                      show_scores = true,
-                      sorter = require"telescope".extensions.fzf
-                          .native_fzf_sorter()
-                  }
-              }
-          }
-        end
     }
 
     use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
     use {
         "nvim-telescope/telescope-frecency.nvim",
         requires = {"tami5/sqlite.lua"},
-        config = function() require"telescope".load_extension("frecency") end
     }
 
     -- document reading {{

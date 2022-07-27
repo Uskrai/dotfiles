@@ -37,6 +37,10 @@ set termguicolors
 lua require("plugins")
 lua require("treesitter")
 lua require("comment")
+lua require("completion")
+lua require("picker")
+lua require("lsp")
+lua require("status")
 
 let g:rust_fold = 1
 
@@ -52,7 +56,6 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fp <cmd>Telescope frecency<cr>
 
-inoremap <silent><expr> <C-space> coc#refresh()
 
 "vim-fswitch
 autocmd BufEnter *fmr/src/*.cpp let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = 'reg:|src|include/fmr|'
@@ -92,7 +95,7 @@ augroup autoformat_settings
   autocmd FileType vue AutoFormatBuffer prettier
 augroup END
 
-autocmd BufWrite *.lua call LuaFormat() 
+" autocmd BufWrite *.lua call LuaFormat() 
 
 autocmd filetype blade
   \ autocmd BufRead,BufEnter * set nowrap
@@ -158,20 +161,21 @@ autocmd FileType slint
   \ let b:closer = 1 |
   \ let b:closer_flags = '([{' 
 
-augroup coc
-  
-" GoTo code navigation.
-  nmap <silent> gd <Plug>(coc-definition)
-  nmap <silent> gy <Plug>(coc-type-definition)
-  nmap <silent> gi <Plug>(coc-implementation)
-  nmap <silent> gr <Plug>(coc-references)
-  nmap <leader>rn <Plug>(coc-rename)
-
-  xmap <leader>A <Plug>(coc-codeaction-selected)
-  nmap <leader>A <Plug>(coc-codeaction-selected)
-
-  nmap <leader>a <Plug>(coc-codeaction-cursor)
-augroup END
+" augroup coc
+"   inoremap <silent><expr> <C-space> coc#refresh()
+"   
+" " GoTo code navigation.
+"   nmap <silent> gd <Plug>(coc-definition)
+"   nmap <silent> gy <Plug>(coc-type-definition)
+"   nmap <silent> gi <Plug>(coc-implementation)
+"   nmap <silent> gr <Plug>(coc-references)
+"   nmap <leader>rn <Plug>(coc-rename)
+"
+"   xmap <leader>A <Plug>(coc-codeaction-selected)
+"   nmap <leader>A <Plug>(coc-codeaction-selected)
+"
+"   nmap <leader>a <Plug>(coc-codeaction-cursor)
+" augroup END
 
 
 let g:lexima_enable_basic_rules = 0
