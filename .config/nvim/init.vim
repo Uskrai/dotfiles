@@ -27,6 +27,9 @@ set sessionoptions+=resize,winpos,terminal
 
 let g:rust_recommended_style = 0
 
+set autoindent
+set smartindent
+
 let g:polyglot_disabled = [
       \ 'autoindent', 
       \ 'rust',
