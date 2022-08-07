@@ -151,6 +151,7 @@ return require('packer').startup(function(use)
     -- use { 'ms-jpq/coq_nvim' }
     use { 'hrsh7th/cmp-nvim-lsp' }
     use { 'hrsh7th/nvim-cmp' }
+    use { 'hrsh7th/cmp-nvim-lsp-signature-help' }
     -- }}Editing
 
 
