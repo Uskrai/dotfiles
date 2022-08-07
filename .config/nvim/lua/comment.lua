@@ -17,7 +17,7 @@ require('Comment').setup {
       location = require('ts_context_commentstring.utils').get_visual_start_location()
     end
 
-    local type = ctx.ctype == U.ctype.line and '__default' or '__multiline',
+    local type = ctx.ctype == U.ctype.line and '__default' or '__multiline'
 
     return require('ts_context_commentstring.internal').calculate_commentstring {
       key =  type,
