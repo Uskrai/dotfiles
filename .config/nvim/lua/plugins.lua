@@ -251,7 +251,7 @@ return require('packer').startup(function(use)
     use {
         'rmagatti/auto-session',
         config = function()
-            vim.o.sessionoptions="blank,buffers,curdir,folds,help,options,tabpages,winsize,resize,winpos,terminal"
+            vim.o.sessionoptions="buffers,curdir,folds,help,options,tabpages,resize,winpos"
         end
     }
 
