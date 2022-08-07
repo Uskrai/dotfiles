@@ -76,7 +76,9 @@ require 'lspconfig'.intelephense.setup{
   settings = {
 
   },
-  licenceKey = 'EducationalCode',
+  init_options = {
+    licenceKey = 'CodeCodeCodeCode',
+  }
 }
 
 
