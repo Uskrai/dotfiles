@@ -47,10 +47,15 @@ require('lspconfig')['pyright'].setup{
   flags = lsp_flags,
   capabilities = capabilities,
 }
-require('lspconfig')['tsserver'].setup{
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
+
+require('typescript').setup{
+  disable_commands = false,
+  debug = false,
+  server = {
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities
+  }
 }
 require('lspconfig')['rust_analyzer'].setup{
   on_attach = on_attach,
