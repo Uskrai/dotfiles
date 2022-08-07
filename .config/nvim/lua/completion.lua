@@ -36,6 +36,7 @@ cmp.setup({
         fallback()
       else
         cmp.mapping.confirm {
+          behavior = cmp.ConfirmBehavior.Replace,
           select = true,
         }(fallback)
       end
