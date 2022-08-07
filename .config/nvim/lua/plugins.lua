@@ -156,6 +156,12 @@ return require('packer').startup(function(use)
         'kosayoda/nvim-lightbulb' ,
         requires = 'antoinemadec/FixCursorHold.nvim',
     }
+    use { 
+        'stevearc/dressing.nvim',
+        config = function ()
+            require('dressing').setup();
+        end
+    }
     -- }}Editing
 
 
