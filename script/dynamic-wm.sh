@@ -4,7 +4,6 @@ WM=sway
 
 NAME=$(basename $0);
 
-echo $NAME;
-# echo $WM/$NAME;
+echo $HOME/script/$WM/$NAME >> ~/script/dynamic-wm.log
 ~/script/$WM/$NAME;
 

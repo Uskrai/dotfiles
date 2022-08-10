@@ -1,3 +1,5 @@
+#!/bin/sh
+echo "calling common-autostart" >> ~/script/dynamic-wm.log
 dunst &
 
 # applet

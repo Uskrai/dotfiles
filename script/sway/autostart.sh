@@ -1,3 +1,4 @@
+#!/bin/sh
 ~/script/common-autostart.sh
 
 xset s 0 0
