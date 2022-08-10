@@ -25,3 +25,6 @@ sudo pacman -S $INSTALL_PACMAN
 ZSH=~/.local/share/oh-my-zsh sh "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 source $(dir)/ohz-plugin
+
+# bootstrap putty so ~/.putty not created
+mkdir ${XDG_CONFIG_HOME}/config/putty -p
