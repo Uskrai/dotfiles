@@ -1,13 +1,8 @@
+local cmp = require 'cmp'
 
-vim.g.coq_settings = {
-  auto_start = 'shut-up',
-  clients = {
-    tree_sitter = { enabled = false },
-    buffers = { enabled = false }
-  }
-}
-
-local cmp = require'cmp'
+if cmp == nil then
+  return
+end
 
 cmp.setup({
   snippet = {
@@ -32,13 +27,14 @@ cmp.setup({
     ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping(function(fallback)
       -- https://github.com/hrsh7th/cmp-nvim-lsp-signature-help/issues/13
-      if not cmp.visible() or not cmp.get_selected_entry() or cmp.get_selected_entry().source.name == 'nvim_lsp_signature_help' then
+      if not cmp.visible() or not cmp.get_selected_entry() or
+          cmp.get_selected_entry().source.name == 'nvim_lsp_signature_help' then
         fallback()
       else
         cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Replace,
           select = true,
-        }(fallback)
+        } (fallback)
       end
     end)
     -- ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
@@ -52,6 +48,7 @@ cmp.setup({
     -- { name = 'snippy' }, -- For snippy users.
   }, {
     { name = 'buffer' },
+    { name = 'path' },
   })
 })
 
@@ -72,15 +69,15 @@ cmp.setup.cmdline('/', {
   }
 })
 
--- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
--- cmp.setup.cmdline(':', {
---   mapping = cmp.mapping.preset.cmdline(),
---   sources = cmp.config.sources({
---     { name = 'path' }
---   }, {
---     { name = 'cmdline' }
---   })
--- })
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
+})
 
 -- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 -- local cmp = require('cmp')

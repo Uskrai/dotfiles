@@ -34,7 +34,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 end
 
-require('nvim-lightbulb').setup({autocmd = {enabled = true}})
 
 local lsp_flags = {
   -- This is the default in Nvim 0.7+
@@ -50,14 +49,14 @@ require('lspconfig')['pyright'].setup{
   capabilities = capabilities,
 }
 
-require('typescript').setup{
-  disable_commands = false,
-  debug = false,
-  server = {
+require'lspconfig'.tsserver.setup{
+  -- disable_commands = false,
+  -- debug = false,
+  -- server = {
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities
-  }
+  -- }
 }
 require('lspconfig')['rust_analyzer'].setup{
   on_attach = on_attach,
@@ -82,6 +81,9 @@ require 'lspconfig'.intelephense.setup{
 }
 
 require'lspconfig'.sumneko_lua.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities,
   settings = {
     Lua = {
       runtime = {

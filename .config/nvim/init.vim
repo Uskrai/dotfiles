@@ -31,19 +31,12 @@ set autoindent
 set smartindent
 
 let g:polyglot_disabled = [
-      \ 'autoindent', 
       \ 'rust',
   \ ]
 
 set termguicolors
 
-lua require("plugins")
-lua require("treesitter")
-lua require("comment")
-lua require("completion")
-lua require("picker")
-lua require("lsp")
-lua require("status")
+lua require("init")
 
 let g:rust_fold = 1
 
@@ -135,16 +128,16 @@ augroup Barbar
 augroup END
 
 " Key bindings can be changed, see below
-call wilder#setup({'modes': [':', '/', '?']})
-call wilder#set_option('renderer', wilder#popupmenu_renderer({
-      \ 'highlighter': wilder#basic_highlighter(),
-      \ 'left': [
-      \   ' ', wilder#popupmenu_devicons(),
-      \ ],
-      \ 'right': [
-      \   ' ', wilder#popupmenu_scrollbar()
-      \ ],
-      \ }))
+" call wilder#setup({'modes': [':', '/', '?']})
+" call wilder#set_option('renderer', wilder#popupmenu_renderer({
+"       \ 'highlighter': wilder#basic_highlighter(),
+"       \ 'left': [
+"       \   ' ', wilder#popupmenu_devicons(),
+"       \ ],
+"       \ 'right': [
+"       \   ' ', wilder#popupmenu_scrollbar()
+"       \ ],
+"       \ }))
 
 autocmd BufNewFile,BufRead *.rn 
   \ :set filetype=rune  |
