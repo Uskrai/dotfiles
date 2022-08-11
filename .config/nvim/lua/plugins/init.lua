@@ -189,6 +189,14 @@ return require('packer').startup(function(use)
             }
         end
     }
+    use {
+        "ThePrimeagen/refactoring.nvim",
+        opt = true,
+        after = 'nvim-lspconfig',
+        requires = {
+            {"nvim-lua/plenary.nvim"},
+        }
+    }
 
     -- completion
     -- use { 'ms-jpq/coq_nvim' }
