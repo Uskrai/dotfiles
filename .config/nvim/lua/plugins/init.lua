@@ -32,7 +32,7 @@ return require('packer').startup(function(use)
     use {
         'andymass/vim-matchup',
         opt = true,
-        setup = require"lazy_load".on_file_open"vim-matchup",
+        setup = require "lazy_load".on_file_open "vim-matchup",
     }
 
     -- Load on a combination of conditions: specific filetypes or commands
@@ -108,19 +108,19 @@ return require('packer').startup(function(use)
     use {
         'tpope/vim-surround',
         opt = true,
-        setup = require"lazy_load".on_file_open"vim-surround",
+        setup = require "lazy_load".on_file_open "vim-surround",
     };
 
     use {
         'SirVer/ultisnips',
         opt = true,
-        setup = require"lazy_load".on_file_open"ultisnips"
+        setup = require "lazy_load".on_file_open "ultisnips"
     };
 
     use {
         'honza/vim-snippets',
         opt = true,
-        setup = require"lazy_load".on_file_open"vim-snippets"
+        setup = require "lazy_load".on_file_open "vim-snippets"
     };
 
     -- auto expand
@@ -135,12 +135,12 @@ return require('packer').startup(function(use)
     use {
         'tpope/vim-eunuch',
         opt = true,
-        cmd = require"lazy_load".eunuch_cmds,
+        cmd = require "lazy_load".eunuch_cmds,
     }
     use {
         'windwp/nvim-autopairs',
         opt = true,
-        setup = require"lazy_load".on_file_open"nvim-autopairs",
+        setup = require "lazy_load".on_file_open "nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
     }
     -- use { 'neoclide/coc-pairs' }
@@ -148,7 +148,7 @@ return require('packer').startup(function(use)
     use {
         'tpope/vim-fugitive',
         opt = true,
-        setup = require"lazy_load".on_file_open"vim-fugitive",
+        setup = require "lazy_load".on_file_open "vim-fugitive",
     }
     use { 'tpope/vim-repeat' }
 
@@ -157,8 +157,8 @@ return require('packer').startup(function(use)
     use {
         'numToStr/Comment.nvim',
         after = 'nvim-treesitter',
-        setup = require'lazy_load'.on_file_open'Comment.nvim',
-        config = require"lazy_load".create_config"comment"
+        setup = require 'lazy_load'.on_file_open 'Comment.nvim',
+        config = require "lazy_load".create_config "comment"
     }
 
     use {
@@ -174,7 +174,7 @@ return require('packer').startup(function(use)
     use {
         'neovim/nvim-lspconfig',
         opt = true,
-        setup = require"lazy_load".on_file_open"nvim-lspconfig",
+        setup = require "lazy_load".on_file_open "nvim-lspconfig",
         config = require "lazy_load".create_config "lsp",
     }
     use {
@@ -182,9 +182,9 @@ return require('packer').startup(function(use)
         opt = true,
         after = 'nvim-lspconfig',
         config = function()
-            require"fidget".setup{
+            require "fidget".setup {
                 window = {
-                  blend = 0
+                    blend = 0
                 }
             }
         end
@@ -194,14 +194,14 @@ return require('packer').startup(function(use)
         opt = true,
         after = 'nvim-lspconfig',
         requires = {
-            {"nvim-lua/plenary.nvim"},
+            { "nvim-lua/plenary.nvim" },
         }
     }
     use {
         'jose-elias-alvarez/null-ls.nvim',
         opt = true,
-        after = {'nvim-lspconfig', 'refactoring.nvim'},
-        config = require"lazy_load".create_config"null-ls",
+        after = { 'nvim-lspconfig', 'refactoring.nvim' },
+        config = require "lazy_load".create_config "null-ls",
     }
 
     -- completion
@@ -261,7 +261,7 @@ return require('packer').startup(function(use)
     }
     use {
         "hoob3rt/lualine.nvim",
-        config = require"lazy_load".create_config"status"
+        config = require "lazy_load".create_config "status"
     }
     use {
         'stevearc/dressing.nvim',
@@ -292,19 +292,19 @@ return require('packer').startup(function(use)
     use {
         'lukas-reineke/indent-blankline.nvim',
         opt = true,
-        setup = require"lazy_load".on_file_open('indent-blankline.nvim'),
-        config = require "lazy_load".create_config("blankline")
+        setup = require "lazy_load".on_file_open 'indent-blankline.nvim',
+        config = require "lazy_load".create_config "blankline"
     }
     -- }}
     use {
         'editorconfig/editorconfig-vim',
         opt = true,
-        setup = require"lazy_load".on_file_open"editorconfig-vim",
+        setup = require "lazy_load".on_file_open "editorconfig-vim",
     }
     use {
         'junegunn/fzf.vim',
         opt = true,
-        cmd = require"lazy_load".fzf_cmds,
+        cmd = require "lazy_load".fzf_cmds,
         requires = { 'junegunn/fzf', run = { 'fzf#install()' } }
     }
 
@@ -313,7 +313,7 @@ return require('packer').startup(function(use)
     use {
         'sheerun/vim-polyglot',
         opt = true,
-        setup = require"lazy_load".on_file_open"vim-polyglot"
+        setup = require "lazy_load".on_file_open "vim-polyglot"
     }
 
     use {
@@ -330,7 +330,7 @@ return require('packer').startup(function(use)
     use {
         'luochen1990/rainbow',
         opt = true,
-        setup = require"lazy_load".on_file_open"rainbow",
+        setup = require "lazy_load".on_file_open "rainbow",
     }
 
     -- use { 'andrejlevkovitch/vim-lua-format' }
@@ -372,13 +372,13 @@ return require('packer').startup(function(use)
     use {
         'kyazdani42/nvim-web-devicons',
         opt = true,
-        setup = require"lazy_load".on_file_open"nvim-web-devicons",
+        setup = require "lazy_load".on_file_open "nvim-web-devicons",
     }
     use {
         'romgrk/barbar.nvim',
         after = 'nvim-web-devicons',
         opt = true,
-        setup = require"lazy_load".on_file_open"barbar.nvim",
+        -- setup = require"lazy_load".on_file_open"barbar.nvim",
     }
 
     -- use {
@@ -389,25 +389,25 @@ return require('packer').startup(function(use)
     use {
         'andweeb/presence.nvim',
         opt = true,
-        setup = require"lazy_load".on_file_open"presence.nvim"
+        setup = require "lazy_load".on_file_open "presence.nvim"
     }
 
     use {
         'tpope/vim-sleuth',
         opt = true,
-        setup = require"lazy_load".on_file_open"vim-sleuth",
+        setup = require "lazy_load".on_file_open "vim-sleuth",
     }
 
     use {
         'Konfekt/FastFold',
         opt = true,
-        setup = require"lazy_load".on_file_open"FastFold",
+        setup = require "lazy_load".on_file_open "FastFold",
     }
 
     use {
         'dinhhuy258/vim-local-history',
         opt = true,
-        setup = require"lazy_load".on_file_open"vim-local-history",
+        setup = require "lazy_load".on_file_open "vim-local-history",
         run = ":UpdateRemotePlugins"
     }
 
