@@ -133,9 +133,6 @@ PATH=$HOME/bin:/usr/local/bin:/home/uskrai/.local/share/gem/ruby/2.7.0/bin:$PATH
 PATH=$HOME/.yarn/bin/:$HOME/.config/composer/vendor/bin:$HOME/.local/bin/:$PATH
 PATH=/opt/clang-format-static/:$PATH
 
-export DENO_INSTALL="/home/uskrai/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
-
 eval "$(mcfly init zsh)"
 alias ls="exa --icons --group-directories-first"
 alias enable-mic="~/script/mic_over_mumble.sh"
