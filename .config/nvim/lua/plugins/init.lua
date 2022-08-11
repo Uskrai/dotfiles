@@ -177,6 +177,18 @@ return require('packer').startup(function(use)
         setup = require"lazy_load".on_file_open"nvim-lspconfig",
         config = require "lazy_load".create_config "lsp",
     }
+    use {
+        'j-hui/fidget.nvim',
+        opt = true,
+        after = 'nvim-lspconfig',
+        config = function()
+            require"fidget".setup{
+                window = {
+                  blend = 0
+                }
+            }
+        end
+    }
 
     -- completion
     -- use { 'ms-jpq/coq_nvim' }
