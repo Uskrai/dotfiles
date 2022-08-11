@@ -8,9 +8,12 @@ export TMPDIR=$TMP
 
 # XDG stuff
 export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_BIN_HOME="$HOME/.local/bin"
+export XDG_LIB_HOME="$HOME/.local/lib"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 
+export DENO_INSTALL="${XDG_BIN_HOME%/bin}"
 
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java 
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
@@ -34,5 +37,4 @@ export TEXMFCONFIG=$XDG_CONFIG_HOME/texlive/texmf-config
 # alias
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
 
-
-
+export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
