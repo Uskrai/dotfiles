@@ -23,6 +23,7 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 # DATA
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export PATH="$CARGO_HOME/bin:$PATH"
+export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
 export GOPATH="$XDG_DATA_HOME"/go
