@@ -227,7 +227,12 @@ return require('packer').startup(function(use)
         },
         after = 'nvim-lspconfig',
         config = function()
-            require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
+            require('nvim-lightbulb').setup({
+                autocmd = { enabled = true },
+                ignore = {
+                    'null-ls'
+                }
+            })
         end
     }
     -- }}Editing
