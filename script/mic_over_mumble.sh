@@ -1,5 +1,7 @@
 #!/bin/bash
 set -euo pipefail
+
+MOM_CONFIG_DIR=${XDG_CONFIG_DIR:-$HOME/.config}/mic-over-mumble
 # To debug, uncomment the following line:
 # set -x
 
@@ -15,10 +17,10 @@ main () {
 }
 
 prepare_env () {
-    if [ ! -e ~/.mic_over_Mumble ]; then
-        mkdir ~/.mic_over_Mumble
+    if [ ! -e $MOM_CONFIG_DIR ]; then
+        mkdir $MOM_CONFIG_DIR 
     fi
-    cd ~/.mic_over_Mumble
+    cd $MOM_CONFIG_DIR 
 
     echo "bonjour=true" > murmur.ini
     echo "bandwidth=130000" >> murmur.ini
