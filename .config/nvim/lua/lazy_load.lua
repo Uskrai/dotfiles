@@ -39,4 +39,6 @@ M.eunuch_cmds = {
     'SudoEdit',
 }
 
+M.treesitter_cmds = require"nvchad-core.lazy_load".treesitter_cmds;
+
 return M;
