@@ -197,6 +197,12 @@ return require('packer').startup(function(use)
             {"nvim-lua/plenary.nvim"},
         }
     }
+    use {
+        'jose-elias-alvarez/null-ls.nvim',
+        opt = true,
+        after = {'nvim-lspconfig', 'refactoring.nvim'},
+        config = require"lazy_load".create_config"null-ls",
+    }
 
     -- completion
     -- use { 'ms-jpq/coq_nvim' }
