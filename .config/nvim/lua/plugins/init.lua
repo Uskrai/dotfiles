@@ -254,12 +254,6 @@ return require('packer').startup(function(use)
 
     -- Appereance{{
     use {
-        'nvim-lua/lsp-status.nvim',
-        config = function()
-            require('lsp-status').register_progress()
-        end
-    }
-    use {
         "hoob3rt/lualine.nvim",
         config = require "lazy_load".create_config "status"
     }
