@@ -1,127 +1,95 @@
-* {
-    min-height: 0;
-}
-#waybar {
-    font-family: "SF Pro Display", Cantarell, Noto Sans, sans-serif;
-    font-size: 16px;
-}
+@define-color bgcolor #2e3440;
+@define-color fgcolor #ffffff;
+@define-color border_bottom #c6baa5;
 
-#window {
-    padding: 0 10px;
+@define-color hover #a5a294;
+@define-color focus #42414a;
+
+@define-color critical #bf616a;
+@define-color warning #bf8761;
+
+@define-color green #8fbcbb;
+@define-color blue #88c0d0;
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: Source Code Pro Medium, Arial, sans-serif;
+  font-size: 11px;
+  min-height: 0;
 }
 
 window#waybar {
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-    text-shadow: none;
-    transition-duration: 0s;
-    color: rgba(217, 216, 216, 1);
-    background: #1a1b26; 
-} 
+  background-color: @bgcolor;
+  border-bottom: 3px solid rgba(66, 65, 74, 0.5);
+  color: @fgcolor;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
 
-#workspaces {
-    margin: 0 5px;
+window#waybar.hidden {
+  opacity: 0.2;
 }
 
 #workspaces button {
-    padding: 0 8px;
-    color: #565f89;
-    border: 3px solid rgba(9, 85, 225, 0);
-    border-radius: 5px;
-    min-width: 5px;
+  background-color: transparent;
+  border-bottom: 3px solid transparent;
+  color: @fgcolor;
+  padding: 0 5px;
 }
 
-#workspaces button.visible {
-    color: #a9b1d6;
-}
-
-#workspaces button.focused {
-    border-top: 3px solid #7aa2f7;
-    border-bottom: 3px solid #7aa2f7;
-}
-
-#workspaces button.urgent {
-    background-color: #a96d1f;
-    color: white;
-}
-
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
-    box-shadow: inherit;
-    border-color: #bb9af7;
-    color: #bb9af7;
+  background: rgba(16, 12, 16, 0.2);
+  box-shadow: inherit;
+  border-bottom: 3px solid @hover;
+  text-shadow: inherit;
 }
-
-/* Repeat style here to ensure properties are overwritten as there's no !important and button:hover above resets the colour */
 
 #workspaces button.focused {
-    color: #7aa2f7;
+  background-color: @focus;
+  border-bottom: 3px solid @border_bottom;
 }
-#workspaces button.focused:hover {
-    color: #bb9af7;
-}
-
-#pulseaudio {
-    /* font-size: 26px; */
+#workspaces button.urgent {
+  background-color: @critical;
 }
 
-#custom-recorder {
-	font-size: 18px;
-	margin: 2px 7px 0px 7px;
-	color:#ee2e24;
-}
-
-#tray,
-#mode,
+#backlight,
 #battery,
-#temperature,
+#clock,
 #cpu,
+#custom-weather,
+#disk,
 #memory,
+#mode,
 #network,
 #pulseaudio,
-#idle_inhibitor,
-#sway-language,
-#backlight,
-#custom-storage,
-#custom-cpu_speed,
-#custom-powermenu,
-#custom-spotify,
-#custom-weather,
-#custom-mail,
-#custom-media {
-    margin: 0px 0px 0px 10px;
-    padding: 0 5px;
-    /* border-top: 3px solid rgba(217, 216, 216, 0.5); */
+#temperature {
+  padding: 0 10px;
+  margin: 0 4px;
 }
 
-/* #clock {
-    margin:     0px 16px 0px 10px;
-    min-width:  140px;
-} */
-
-#battery.warning {
-    color: rgba(255, 210, 4, 1);
+#battery {
+  color: @green;
+}
+#temperature {
+  color: @blue;
 }
 
-#battery.critical {
-    color: rgba(238, 46, 36, 1);
+#battery.warning,
+#cpu.warning,
+#disk.warning,
+#memory.warning {
+  color: @warning;
 }
 
-#battery.charging {
-    color: rgba(217, 216, 216, 1);
-}
-
-#custom-storage.warning {
-    color: rgba(255, 210, 4, 1);
-}
-
-#custom-storage.critical {
-    color: rgba(238, 46, 36, 1);
-}
-
-@keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: black;
-    }
+#battery.critical:not(.charging),
+#cpu.critical,
+#disk.critical,
+#memory.critical,
+#network.disconnected,
+#network.linked,
+#pulseaudio.muted,
+#temperature.critical {
+  color: @critical;
 }
