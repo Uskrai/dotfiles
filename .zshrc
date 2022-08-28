@@ -1,3 +1,5 @@
+# zmodload zsh/zprof
+
 # On slow systems, checking the cached .zcompdump file to see if it must be 
 # regenerated adds a noticable delay to zsh startup.  This little hack restricts 
 # it to once a day.  It should be pasted into your own completion file.
@@ -32,12 +34,17 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light clarketm/zsh-completions
 zinit light Aloxaf/fzf-tab
 
+zinit ice svn
+zinit snippet OMZP::extract
+zinit snippet OMZP::last-working-dir
+zinit snippet OMZP::colored-man-pages
+
 # typeset -gA FAST_BLIST_PATTERNS 
 # FAST_BLIST_PATTERNS[$HOME/dling]=1
 # zinit light zdharma-continuum/fast-syntax-highlighting
 
 ZSH_HIGHLIGHT_DIRS_BLACKLIST=($HOME/dling)
-zinit ice wait"2"
+zinit ice wait"1" silent
 zinit light "zsh-users/zsh-syntax-highlighting"
 
 # Load theme file
@@ -101,7 +108,6 @@ fi
 
 fpath+=~/.zfunc
 
-eval "$(mcfly init zsh)"
 alias l='ls -lah'
 alias la='ls -lAh'
 alias ll='ls -lh'
@@ -141,8 +147,11 @@ source ~/.profile
 
 # eval "$(diesel completions zsh)"
 eval "$(zoxide init zsh)"
+eval "$(mcfly init zsh)"
 
 bindkey -r '^[c'
 # bindkey -r <M-c>
 #
 unsetopt caseglob
+
+# zprof | less
