@@ -129,10 +129,6 @@ fi
 
 fpath+=~/.zfunc
 
-PATH=$HOME/bin:/usr/local/bin:/home/uskrai/.local/share/gem/ruby/2.7.0/bin:$PATH
-PATH=$HOME/.yarn/bin/:$HOME/.config/composer/vendor/bin:$HOME/.local/bin/:$PATH
-PATH=/opt/clang-format-static/:$PATH
-
 eval "$(mcfly init zsh)"
 alias ls="exa --icons --group-directories-first"
 alias enable-mic="~/script/mic_over_mumble.sh"
@@ -140,8 +136,6 @@ alias toggle-touchpad="~/script/toggle-touchpad.sh"
 alias zip-folder="~/script/zip.sh"
 alias locate-dling="slocate -d ~/.mlocate-dling"
 alias idea="_JAVA_AWT_WM_NONREPARENTING=1 intellij-idea-ultimate-edition"
-
-export LD_LIBRARY_PATH="/usr/local/lib:/usr/lib"
 
 alias joinpdf="gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite"
 
@@ -173,9 +167,4 @@ eval "$(zoxide init zsh)"
 bindkey -r '^[c'
 # bindkey -r <M-c>
 #
-
-export GPG_TTY=$(tty)
-export PINENTRY_USER_DATA=USE_TTY=1
-export WINEPREFIX="/mnt/g/uskrai/wine"
-
 unsetopt caseglob

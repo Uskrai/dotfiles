@@ -22,7 +22,12 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 
 # DATA
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
+
 export PATH="$CARGO_HOME/bin:$PATH"
+export PATH=$HOME/bin:/usr/local/bin:/home/uskrai/.local/share/gem/ruby/2.7.0/bin:$PATH
+export PATH=$HOME/.yarn/bin/:$HOME/.config/composer/vendor/bin:$HOME/.local/bin/:$PATH
+export PATH=/opt/clang-format-static/:$PATH
+
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
@@ -39,3 +44,8 @@ export TEXMFCONFIG=$XDG_CONFIG_HOME/texlive/texmf-config
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
 
 export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
+
+export LD_LIBRARY_PATH="/usr/local/lib:/usr/lib"
+export GPG_TTY=$(tty)
+export PINENTRY_USER_DATA=USE_TTY=1
+export WINEPREFIX="/mnt/g/uskrai/wine"
