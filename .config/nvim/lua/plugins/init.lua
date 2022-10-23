@@ -9,7 +9,7 @@ return require('packer').startup(function(use)
     -- Packer can manage itself
     use {
         'wbthomason/packer.nvim',
-        cmd = lazy_load().packer_cmds,
+        cmd = require "lazy_load".packer_cmds,
         config = function()
             require "plugins"
         end
@@ -112,16 +112,23 @@ return require('packer').startup(function(use)
     };
 
     use {
-        'SirVer/ultisnips',
+        "L3MON4D3/LuaSnip",
         opt = true,
-        setup = require "lazy_load".on_file_open "ultisnips"
-    };
-
-    use {
-        'honza/vim-snippets',
-        opt = true,
-        setup = require "lazy_load".on_file_open "vim-snippets"
-    };
+        setup = require "lazy_load".on_file_open "LuaSnip",
+        config = require "lazy_load".create_config "luasnip",
+    }
+    use "rafamadriz/friendly-snippets";
+    -- use {
+    --     'SirVer/ultisnips',
+    --     opt = true,
+    --     setup = require "lazy_load".on_file_open "ultisnips"
+    -- };
+    --
+    -- use {
+    --     'honza/vim-snippets',
+    --     opt = true,
+    --     setup = require "lazy_load".on_file_open "vim-snippets"
+    -- };
 
     -- auto expand
     -- use "cohama/lexima.vim"
@@ -139,17 +146,17 @@ return require('packer').startup(function(use)
     }
     use {
         'windwp/nvim-autopairs',
-        opt = true,
-        setup = require "lazy_load".on_file_open "nvim-autopairs",
+        -- opt = true,
+        -- setup = require "lazy_load".on_file_open "nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
     }
     -- use { 'neoclide/coc-pairs' }
 
-    use {
-        'tpope/vim-fugitive',
-        opt = true,
-        setup = require "lazy_load".on_file_open "vim-fugitive",
-    }
+    -- use {
+    --     'tpope/vim-fugitive',
+    --     opt = true,
+    --     setup = require "lazy_load".on_file_open "vim-fugitive",
+    -- }
     use { 'tpope/vim-repeat' }
 
     -- comment
@@ -160,23 +167,40 @@ return require('packer').startup(function(use)
         setup = require 'lazy_load'.on_file_open 'Comment.nvim',
         config = require "lazy_load".create_config "comment"
     }
-
-    use {
-        'preservim/nerdtree',
-        opt = true,
-        cmd = {
-            'NERDTree',
-        }
-    }
-
-    -- LSP
-    -- use {'neoclide/coc.nvim', run = {'yarn install --frozen-lockfile'}}
+    --
+    -- use {
+    --     'preservim/nerdtree',
+    --     opt = true,
+    --     cmd = {
+    --         'NERDTree',
+    --     }
+    -- }
+    --
+    -- -- LSP
+    -- -- use {'neoclide/coc.nvim', run = {'yarn install --frozen-lockfile'}}
     use {
         'neovim/nvim-lspconfig',
         opt = true,
         setup = require "lazy_load".on_file_open "nvim-lspconfig",
         config = require "lazy_load".create_config "lsp",
     }
+
+    use "weilbith/nvim-code-action-menu";
+
+    use {
+        'simrat39/rust-tools.nvim',
+        opt = true,
+        after = 'nvim-lspconfig',
+        config = require "lazy_load".create_config "rust-tools"
+    }
+
+    use {
+        'akinsho/flutter-tools.nvim',
+        opt = true,
+        after = 'nvim-lspconfig',
+        config = require "lazy_load".create_config "flutter-tools"
+    }
+
     use {
         'j-hui/fidget.nvim',
         opt = true,
@@ -204,11 +228,16 @@ return require('packer').startup(function(use)
         config = require "lazy_load".create_config "null-ls",
     }
 
-    -- completion
-    -- use { 'ms-jpq/coq_nvim' }
+    use {
+        'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+        setup = require "lazy_load".on_file_open "lsp_lines.nvim",
+    }
+
+    -- -- completion
+    -- -- use { 'ms-jpq/coq_nvim' }
     use {
         'hrsh7th/nvim-cmp',
-        setup = require "lazy_load".on_file_open "nvim-cmp",
+        -- setup = require "lazy_load".on_file_open "nvim-cmp",
         config = require "lazy_load".create_config "nvim-cmp",
         requires = {
             {
@@ -228,6 +257,9 @@ return require('packer').startup(function(use)
             },
             {
                 "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+            },
+            {
+                "saadparwaiz1/cmp_luasnip"
             }
         },
         after = { 'cmp-nvim-lsp', 'cmp-nvim-lsp-signature-help', 'lsp_lines.nvim' }
@@ -276,7 +308,50 @@ return require('packer').startup(function(use)
     -- use 'dikiaap/minimalist'
     -- use 'cocopon/iceberg.vim'
     -- use 'sainnhe/gruvbox-material' // no transparent background on EOL
-    use 'kaicataldo/material.vim'
+    -- use {
+    --     'kaicataldo/material.vim',
+    --     config = function()
+    --         vim.api.nvim_command "colorscheme material"
+    --     end
+    -- }
+    -- use {
+    --     'marko-cerovac/material.nvim',
+    --     config = function()
+    --         require("material").setup {
+    --             disable = {
+    --                 -- colored_cursor = false, -- Disable the colored cursor
+    --                 -- borders = false, -- Disable borders between verticaly split windows
+    --                 background = true, -- Prevent the theme from setting the background (NeoVim then uses your teminal background)
+    --                 -- term_colors = false, -- Prevent the theme from setting terminal colors
+    --                 -- eob_lines = false -- Hide the end-of-buffer lines
+    --             },
+    --
+    --             plugins = {
+    --                 gitsigns = true,
+    --                 nvim_cmp = true,
+    --                 -- telescope = true,
+    --                 indent_blankline = true,
+    --             }
+    --         }
+    --         vim.api.nvim_command "colorscheme material"
+    --     end
+    -- }
+    use {
+        'catppuccin/nvim',
+        as = "catppuccin",
+        config = function()
+            vim.g.catppuccin_flavour = "macchiato"
+            require("catppuccin").setup {
+                transparent_background = true,
+                integrations = {
+                    gitsigns = true,
+                    treesitter = true,
+                    barbar = true,
+                }
+            }
+            vim.api.nvim_command "colorscheme catppuccin"
+        end
+    }
 
     -- use {
     --     'arcticicestudio/nord-vim',
@@ -289,7 +364,7 @@ return require('packer').startup(function(use)
         setup = require "lazy_load".on_file_open 'indent-blankline.nvim',
         config = require "lazy_load".create_config "blankline"
     }
-    -- }}
+    -- }} appereance
     use {
         'editorconfig/editorconfig-vim',
         opt = true,
@@ -301,25 +376,25 @@ return require('packer').startup(function(use)
         cmd = require "lazy_load".fzf_cmds,
         requires = { 'junegunn/fzf', run = { 'fzf#install()' } }
     }
-
-    -- use { 'jackguo380/vim-lsp-cxx-highlight' }
-
-    use {
-        'sheerun/vim-polyglot',
-        opt = true,
-        setup = require "lazy_load".on_file_open "vim-polyglot"
-    }
-
-    use {
-        'derekwyatt/vim-fswitch',
-        opt = true,
-        ft = {
-            'cpp',
-            'c'
-        }
-    }
-
-    use { 'farmergreg/vim-lastplace' }
+    --
+    -- -- use { 'jackguo380/vim-lsp-cxx-highlight' }
+    --
+    -- use {
+    --     'sheerun/vim-polyglot',
+    --     opt = true,
+    --     setup = require "lazy_load".on_file_open "vim-polyglot"
+    -- }
+    --
+    -- use {
+    --     'derekwyatt/vim-fswitch',
+    --     opt = true,
+    --     ft = {
+    --         'cpp',
+    --         'c'
+    --     }
+    -- }
+    --
+    -- use { 'farmergreg/vim-lastplace' }
 
     use {
         'luochen1990/rainbow',
@@ -342,11 +417,11 @@ return require('packer').startup(function(use)
         run = "make",
         after = 'telescope.nvim',
     }
-    use {
-        "nvim-telescope/telescope-frecency.nvim",
-        requires = { "tami5/sqlite.lua" },
-        after = 'telescope.nvim',
-    }
+    -- use {
+    --     "nvim-telescope/telescope-frecency.nvim",
+    --     requires = { "tami5/sqlite.lua" },
+    --     after = 'telescope.nvim',
+    -- }
 
     -- document reading {{
     use {
@@ -356,12 +431,12 @@ return require('packer').startup(function(use)
     -- }} document reading
 
 
-    -- use {
-    --     'rmagatti/auto-session',
-    --     config = function()
-    --         vim.o.sessionoptions = "buffers,curdir,folds,help,options,tabpages,resize,winpos"
-    --     end
-    -- }
+    use {
+        'rmagatti/auto-session',
+        config = function()
+            vim.o.sessionoptions = "buffers,curdir,folds,help,options,tabpages,resize,winpos"
+        end
+    }
 
     use {
         'kyazdani42/nvim-web-devicons',
@@ -392,11 +467,22 @@ return require('packer').startup(function(use)
         setup = require "lazy_load".on_file_open "vim-sleuth",
     }
 
+    -- FOLD
+    use { 'kevinhwang91/promise-async' }
     use {
-        'Konfekt/FastFold',
+        'kevinhwang91/nvim-ufo',
         opt = true,
-        setup = require "lazy_load".on_file_open "FastFold",
+        setup = require "lazy_load".on_file_open "nvim-ufo",
+        config = require "lazy_load".create_config "nvim-ufo",
     }
+
+
+    -- FOLD
+    -- use {
+    --     'Konfekt/FastFold',
+    --     opt = true,
+    --     setup = require "lazy_load".on_file_open "FastFold",
+    -- }
 
     use {
         'dinhhuy258/vim-local-history',
@@ -424,4 +510,20 @@ return require('packer').startup(function(use)
         'stephpy/vim-php-cs-fixer',
         ft = 'php',
     }
+
+    use {
+        "aklt/plantuml-syntax"
+    }
+
+    use "tyru/open-browser.vim";
+    use "weirongxu/plantuml-previewer.vim";
+    use "liuchengxu/graphviz.vim";
+
+    use { 'ja-ford/delaytrain.nvim',
+        config = function()
+            require('delaytrain').setup {
+                delay_ms = 1000,
+            }
+        end
+    };
 end)

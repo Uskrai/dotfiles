@@ -74,21 +74,21 @@ let g:delimitMate_expand_space = 1
 let g:delimitMate_balance_matchpair = 1
 
 augroup autoformat_settings
-  autocmd FileType bzl AutoFormatBuffer buildifier
-  autocmd FileType c,cpp,proto,arduino AutoFormatBuffer clang-format
-  autocmd FileType c,cpp,proto,arduino Glaive codefmt clang_format_executable='clang-format-14'
-  autocmd FileType dart AutoFormatBuffer dartfmt
-  autocmd FileType go AutoFormatBuffer gofmt
-  autocmd FileType gn AutoFormatBuffer gn
+  " autocmd FileType bzl AutoFormatBuffer buildifier
+  " autocmd FileType c,cpp,proto,arduino AutoFormatBuffer clang-format
+  " autocmd FileType c,cpp,proto,arduino Glaive codefmt clang_format_executable='clang-format-14'
+  " autocmd FileType dart AutoFormatBuffer dartfmt
+  " autocmd FileType go AutoFormatBuffer gofmt
+  " autocmd FileType gn AutoFormatBuffer gn
   " autocmd FileType javascript eslint
   " autocmd FileType html,css,sass,scss,less,json,javascript AutoFormatBuffer prettier
   "" autocmd FileType java AutoFormatBuffer google-java-format
   "" autocmd FileType java autocmd BufLeave * :FormatCode
 
-  autocmd FileType python AutoFormatBuffer yapf
+  " autocmd FileType python AutoFormatBuffer yapf
   "" Alternative: autocmd FileType python AutoFormatBuffer autopep8
-  autocmd FileType rust AutoFormatBuffer rustfmt
-  autocmd FileType vue AutoFormatBuffer prettier
+  " autocmd FileType rust AutoFormatBuffer rustfmt
+  " autocmd FileType vue AutoFormatBuffer prettier
 augroup END
 
 " autocmd BufWrite *.lua call LuaFormat() 
@@ -123,8 +123,8 @@ augroup Barbar
 
   nnoremap <silent>   <A-p> :BufferPick<CR>
 
-  nnoremap <silent>   <A-<> :BufferMovePrevious<CR>
-  nnoremap <silent>   <A->> :BufferMoveNext<CR>
+  nnoremap <silent>   <A-S-,> :BufferMovePrevious<CR>
+  nnoremap <silent>   <A-S-.> :BufferMoveNext<CR>
 augroup END
 
 " Key bindings can be changed, see below
@@ -204,7 +204,7 @@ autocmd ColorScheme * call MakeTransparent()
 " autocmd BufNewFile,BufRead * match OverLength /\%81v.\+/
 " autocmd BufNewFile,BufRead *.rs match OverLength /\%101v.\+/
 
-colorscheme material
+" colorscheme material
 
 function SetupRust()
   set tabstop=4

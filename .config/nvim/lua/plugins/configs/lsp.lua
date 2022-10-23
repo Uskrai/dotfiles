@@ -1,11 +1,32 @@
+local function format(context)
+  print(vim.inspect(context));
+  vim.lsp.buf.format {
+    filter = function (client)
+      if client.name ~= "tsserver" then
+        return true
+      end
+
+      return false
+    end,
+    timeout_ms = 2000,
+  }
+end
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
+local opts = { noremap = true, silent = true }
+
+
+
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+vim.keymap.set('n', '<space>f', format, opts)
+
+-- local lsp_formatting = function(bufnr)
+--
+-- end
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -13,9 +34,18 @@ local on_attach = function(_, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+  local function code_action(context)
+    vim.lsp.buf.code_action {
+      filter = function(c)
+        print(vim.inspect(c))
+        return true
+      end
+    };
+  end
+
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', ':Telescope lsp_definitions<cr>', bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -28,9 +58,10 @@ local on_attach = function(_, bufnr)
   end, bufopts)
   vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', '<leader>a', code_action, bufopts)
+  -- vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', ':Telescope lsp_references<cr>', bufopts)
-  vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+  vim.keymap.set('n', '<space>f', format, bufopts)
 end
 
 
@@ -39,35 +70,42 @@ local lsp_flags = {
   debounce_text_changes = 150,
 }
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities();
 -- local capabilities = require"coq".lsp_ensure_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-require('lspconfig')['pyright'].setup{
+require('lspconfig')['pyright'].setup {
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
 }
 
-require'lspconfig'.tsserver.setup{
+require 'lspconfig'.tsserver.setup {
   -- disable_commands = false,
   -- debug = false,
   -- server = {
-    on_attach = on_attach,
-    flags = lsp_flags,
-    capabilities = capabilities
-  -- }
-}
-require('lspconfig')['rust_analyzer'].setup{
   on_attach = on_attach,
   flags = lsp_flags,
-  capabilities = capabilities,
-  -- Server-specific settings...
-  settings = {
-    ["rust-analyzer"] = {}
-  }
+  capabilities = capabilities
+  -- }
 }
 
-require 'lspconfig'.intelephense.setup{
+require 'lspconfig'.clangd.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities
+}
+
+--[[ require('lspconfig')['rust_analyzer'].setup{ ]]
+--[[   on_attach = on_attach, ]]
+--[[   flags = lsp_flags, ]]
+--[[   capabilities = capabilities, ]]
+--[[   -- Server-specific settings... ]]
+--[[   settings = { ]]
+--[[     ["rust-analyzer"] = {} ]]
+--[[   } ]]
+--[[ } ]]
+
+require 'lspconfig'.intelephense.setup {
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
@@ -79,7 +117,49 @@ require 'lspconfig'.intelephense.setup{
   }
 }
 
-require'lspconfig'.sumneko_lua.setup {
+require 'lspconfig'.zls.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities,
+}
+
+require 'lspconfig'.gopls.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities,
+}
+
+-- require 'lspconfig'.emmet_ls.setup {
+--   on_attach = on_attach,
+--   flags = lsp_flags,
+--   capabilities = capabilities,
+-- }
+
+require 'lspconfig'.html.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities,
+}
+
+require 'lspconfig'.cssls.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities,
+}
+
+-- require 'lspconfig'.jsonls.setup {
+--   on_attach = on_attach,
+--   flags = lsp_flags,
+--   capabilities = capabilities,
+-- }
+
+require 'lspconfig'.dockerls.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities,
+}
+
+require 'lspconfig'.sumneko_lua.setup {
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
@@ -91,7 +171,7 @@ require'lspconfig'.sumneko_lua.setup {
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
+        globals = { 'vim' },
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
@@ -106,15 +186,28 @@ require'lspconfig'.sumneko_lua.setup {
 }
 
 
-vim.diagnostic.config({virtual_text = false})
+vim.diagnostic.config({
+  virtual_text = false,
+  -- virtual_lines = {
+  --   only_current_line = true
+  -- }
+})
 require("lsp_lines").setup()
--- local function enable_lsp_lines()
-  -- vim.diagnostic.config({virtual_lines = not vim.diagnostic.config().virtual_lines})
-  -- print(require("lsp_lines").toggle())
--- end
+local function enable_lsp_lines()
+  vim.diagnostic.config({ virtual_lines = not vim.diagnostic.config().virtual_lines })
+  print(require("lsp_lines").toggle())
+  print("toggle lsp_lines")
+end
+
 vim.keymap.set(
   "",
   "<Leader>l",
-  require("lsp_lines").toggle,
+  enable_lsp_lines,
   { desc = "Toggle lsp_lines" }
 )
+
+return {
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities
+};

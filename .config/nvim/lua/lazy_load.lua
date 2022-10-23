@@ -20,13 +20,13 @@ M.fzf_cmds = {
     'Buffers',
     'Colors',
     "Ag",
-    "Rg",
-    'Lines',
+    "Rg", 'Lines',
     'RLines',
 }
 
 M.eunuch_cmds = {
     'Remove',
+    'Rename',
     'Delete',
     'Move',
     'Chmod',
@@ -40,5 +40,7 @@ M.eunuch_cmds = {
 }
 
 M.treesitter_cmds = require"nvchad-core.lazy_load".treesitter_cmds;
+
+M.packer_cmds = require"nvchad-core.lazy_load".packer_cmds;
 
 return M;
