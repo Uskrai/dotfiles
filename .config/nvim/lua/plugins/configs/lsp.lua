@@ -1,5 +1,4 @@
 local function format(context)
-  print(vim.inspect(context));
   vim.lsp.buf.format {
     filter = function (client)
       if client.name ~= "tsserver" then
@@ -8,7 +7,7 @@ local function format(context)
 
       return false
     end,
-    timeout_ms = 2000,
+    timeout_ms = 5000,
   }
 end
 
@@ -28,9 +27,8 @@ vim.keymap.set('n', '<space>f', format, opts)
 --
 -- end
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(_, bufnr)
+
+local on_attach_without_inlay = function (_, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -64,6 +62,14 @@ local on_attach = function(_, bufnr)
   vim.keymap.set('n', '<space>f', format, bufopts)
 end
 
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  on_attach_without_inlay(client, bufnr)
+  require("lsp-inlayhints").on_attach(client, bufnr)
+end
+
+
 
 local lsp_flags = {
   -- This is the default in Nvim 0.7+
@@ -73,10 +79,25 @@ local lsp_flags = {
 local capabilities = require('cmp_nvim_lsp').default_capabilities();
 -- local capabilities = require"coq".lsp_ensure_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-require('lspconfig')['pyright'].setup {
+-- require('lspconfig')['pyright'].setup {
+--   on_attach = on_attach,
+--   flags = lsp_flags,
+--   capabilities = capabilities,
+-- }
+require'lspconfig'.pylsp.setup{
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
+  -- settings = {
+  --   pylsp = {
+  --     plugins = {
+  --       rope_autoimport = {
+  --         enabled = true,
+  --         memory = true
+  --       }
+  --     }
+  --   }
+  -- }
 }
 
 require 'lspconfig'.tsserver.setup {
@@ -159,7 +180,7 @@ require 'lspconfig'.dockerls.setup {
   capabilities = capabilities,
 }
 
-require 'lspconfig'.sumneko_lua.setup {
+require 'lspconfig'.lua_ls.setup {
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
@@ -208,6 +229,7 @@ vim.keymap.set(
 
 return {
   on_attach = on_attach,
+  on_attach_without_inlay = on_attach_without_inlay,
   flags = lsp_flags,
   capabilities = capabilities
 };

@@ -185,6 +185,13 @@ return require('packer').startup(function(use)
         config = require "lazy_load".create_config "lsp",
     }
 
+    use {
+        'lvimuser/lsp-inlayhints.nvim',
+        config = function ()
+            require("lsp-inlayhints").setup()
+        end
+    }
+
     use "weilbith/nvim-code-action-menu";
 
     use {
@@ -384,6 +391,7 @@ return require('packer').startup(function(use)
     --     opt = true,
     --     setup = require "lazy_load".on_file_open "vim-polyglot"
     -- }
+    use 'jwalton512/vim-blade';
     --
     -- use {
     --     'derekwyatt/vim-fswitch',
@@ -434,7 +442,8 @@ return require('packer').startup(function(use)
     use {
         'rmagatti/auto-session',
         config = function()
-            vim.o.sessionoptions = "buffers,curdir,folds,help,options,tabpages,resize,winpos"
+            vim.o.sessionoptions = "buffers,curdir,folds,help,options,tabpages"
+            -- vim.o.sessionoptions = "buffers,curdir,folds,help,options,tabpages,resize,winpos"
         end
     }
 
@@ -458,7 +467,16 @@ return require('packer').startup(function(use)
     use {
         'andweeb/presence.nvim',
         opt = true,
-        setup = require "lazy_load".on_file_open "presence.nvim"
+        setup = require "lazy_load".on_file_open "presence.nvim",
+        config = function ()
+            require("presence").setup({
+                blacklist = {
+                    "/home/uskrai/project/private",
+                    "/home/uskrai/.local/share/mind.nvim",
+                    "/home/uskrai/project/go/filemover"
+                }
+            })
+        end
     }
 
     use {
@@ -519,11 +537,30 @@ return require('packer').startup(function(use)
     use "weirongxu/plantuml-previewer.vim";
     use "liuchengxu/graphviz.vim";
 
-    use { 'ja-ford/delaytrain.nvim',
-        config = function()
-            require('delaytrain').setup {
-                delay_ms = 1000,
-            }
+    -- note taking
+    use {
+        'phaazon/mind.nvim',
+        branch = 'v2.2',
+        requires = { 'nvim-lua/plenary.nvim' },
+        opt = true,
+        cmd = {
+            'MindOpenMain',
+            'MindOpenProject',
+            'MindOpenSmartProject',
+            'MindReloadState',
+            'MindClose'
+        },
+        config = function ()
+            require 'mind'.setup()
         end
-    };
+
+    }
+
+    -- use { 'ja-ford/delaytrain.nvim',
+    --     config = function()
+    --         require('delaytrain').setup {
+    --             delay_ms = 1000,
+    --         }
+    --     end
+    -- };
 end)

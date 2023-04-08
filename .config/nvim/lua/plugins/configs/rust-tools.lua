@@ -8,7 +8,7 @@ local last_ra = nil
 
 rt.setup({
   server = {
-    on_attach = lsp.on_attach,
+    on_attach = lsp.on_attach_without_inlay,
     capabilities = lsp.capabilities,
     flags = lsp.flags,
     -- cmd = { "ra-multiplex" },
@@ -18,7 +18,7 @@ rt.setup({
           allFeatures = true,
         },
         checkOnSave = {
-          command = "clippy"
+          -- command = "clippy"
         }
       }
     },

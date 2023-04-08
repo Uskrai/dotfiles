@@ -15,6 +15,10 @@ require"null-ls".setup {
     -- f.clang_format,
     -- f.jq,
     f.prettier,
+    b.diagnostics.mypy,
+    f.black,
+    f.fish_indent,
+    f.fish,
     -- f.phpcbf,
     -- f.phpcsfixer,
   }
