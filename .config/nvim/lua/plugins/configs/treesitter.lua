@@ -1,5 +1,4 @@
-
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
@@ -10,14 +9,14 @@ require'nvim-treesitter.configs'.setup {
   },
   indent = {
     enable = true,
-    disable = { 'php' }
+    -- disable = { 'php' }
   }
 }
 require "nvim-treesitter.configs".setup {
   playground = {
     enable = true,
     disable = {},
-    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+    updatetime = 25,         -- Debounced time for highlighting nodes in the playground from source code
     persist_queries = false, -- Whether the query persists across vim sessions
     keybindings = {
       toggle_query_editor = 'o',
@@ -34,3 +33,24 @@ require "nvim-treesitter.configs".setup {
   }
 }
 
+
+
+-- vim.g.rainbow_delimiters = {
+--   strategy = {
+--     [''] = rainbow_delimiters.strategy['global'],
+--     vim = rainbow_delimiters.strategy['local'],
+--   },
+--   query = {
+--     [''] = 'rainbow-delimiters',
+--     lua = 'rainbow-blocks',
+--   },
+--   highlight = {
+--     'RainbowDelimiterRed',
+--     'RainbowDelimiterYellow',
+--     'RainbowDelimiterBlue',
+--     'RainbowDelimiterOrange',
+--     'RainbowDelimiterGreen',
+--     'RainbowDelimiterViolet',
+--     'RainbowDelimiterCyan',
+--   },
+-- }

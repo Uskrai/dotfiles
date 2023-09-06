@@ -222,6 +222,12 @@ let loaded_netrwPlugin = 1
 let g:vimtex_quickfix_open_on_warning = 0
 
 autocmd BufNewFile,BufRead *.tex call SetupLatex()
+autocmd BufNewFile,BufRead .envrc setfiletype bash
+autocmd BufNewFile,BufRead direnvrc setfiletype bash
+
+" :profile start vim.log
+" :profile file *
+" :profile func *
 
 let g:local_history_new_change_delay = 30
 let g:local_history_max_changes = 100000

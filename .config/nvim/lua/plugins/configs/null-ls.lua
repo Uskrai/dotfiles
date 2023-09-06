@@ -10,7 +10,10 @@ require"null-ls".setup {
     cmp.tags,
     -- diag.phpcs,
     -- f.astyle,
-    f.beautysh,
+    -- f.beautysh,
+    f.shfmt.with({
+      filetypes = {"bash", "sh"}
+    }),
     f.blade_formatter,
     -- f.clang_format,
     -- f.jq,
@@ -18,7 +21,12 @@ require"null-ls".setup {
     b.diagnostics.mypy,
     f.black,
     f.fish_indent,
-    f.fish,
+    b.diagnostics.fish,
+    b.diagnostics.eslint.with({
+      condition = function(utils)
+        return utils.root_has_file({".eslintrc.*"})
+      end
+    }),
     -- f.phpcbf,
     -- f.phpcsfixer,
   }

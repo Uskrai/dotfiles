@@ -7,7 +7,7 @@ end
 cmp.setup({
   preselect = cmp.PreselectMode.None,
   experimental = {
-    ghost_text = true,
+    ghost_text = false
   },
   snippet = {
     -- REQUIRED - you must specify a snippet engine

@@ -1,6 +1,6 @@
 local function format(context)
   vim.lsp.buf.format {
-    filter = function (client)
+    filter = function(client)
       if client.name ~= "tsserver" then
         return true
       end
@@ -28,7 +28,7 @@ vim.keymap.set('n', '<space>f', format, opts)
 -- end
 
 
-local on_attach_without_inlay = function (_, bufnr)
+local on_attach_without_inlay = function(_, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -84,7 +84,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities();
 --   flags = lsp_flags,
 --   capabilities = capabilities,
 -- }
-require'lspconfig'.pylsp.setup{
+require 'lspconfig'.pylsp.setup {
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
@@ -105,9 +105,20 @@ require 'lspconfig'.tsserver.setup {
   -- debug = false,
   -- server = {
   on_attach = on_attach,
+  root_dir = require "lspconfig".util.root_pattern("package.json"),
+  flags = lsp_flags,
+  capabilities = capabilities,
+  single_file_support = false
+
+  -- }
+}
+
+require 'lspconfig'.denols.setup {
+  on_attach = on_attach,
+  root_dir = require "lspconfig".util.root_pattern("deno.json"),
   flags = lsp_flags,
   capabilities = capabilities
-  -- }
+
 }
 
 require 'lspconfig'.clangd.setup {
@@ -125,18 +136,17 @@ require 'lspconfig'.clangd.setup {
 --[[     ["rust-analyzer"] = {} ]]
 --[[   } ]]
 --[[ } ]]
-
-require 'lspconfig'.intelephense.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
-  settings = {
-
-  },
-  init_options = {
-    licenceKey = 'CodeCodeCodeCode',
-  }
-}
+-- require 'lspconfig'.intelephense.setup {
+--   on_attach = on_attach,
+--   flags = lsp_flags,
+--   capabilities = capabilities,
+--   settings = {
+--
+--   },
+--   init_options = {
+--     licenceKey = 'CodeCodeCodeCode',
+--   }
+-- }
 
 require 'lspconfig'.zls.setup {
   on_attach = on_attach,
@@ -207,25 +217,27 @@ require 'lspconfig'.lua_ls.setup {
 }
 
 
-vim.diagnostic.config({
-  virtual_text = false,
-  -- virtual_lines = {
-  --   only_current_line = true
-  -- }
-})
-require("lsp_lines").setup()
-local function enable_lsp_lines()
-  vim.diagnostic.config({ virtual_lines = not vim.diagnostic.config().virtual_lines })
-  print(require("lsp_lines").toggle())
-  print("toggle lsp_lines")
-end
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
 
-vim.keymap.set(
-  "",
-  "<Leader>l",
-  enable_lsp_lines,
-  { desc = "Toggle lsp_lines" }
-)
+-- vim.diagnostic.config({
+--   virtual_text = false,
+--   -- virtual_lines = {
+--   --   only_current_line = true
+--   -- }
+-- })
+-- require("lsp_lines").setup()
+-- local function enable_lsp_lines()
+--   vim.diagnostic.config({ virtual_lines = not vim.diagnostic.config().virtual_lines })
+--   print(require("lsp_lines").toggle())
+--   print("toggle lsp_lines")
+-- end
+--
+-- vim.keymap.set(
+--   "",
+--   "<Leader>l",
+--   enable_lsp_lines,
+--   { desc = "Toggle lsp_lines" }
+-- )
 
 return {
   on_attach = on_attach,

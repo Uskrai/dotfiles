@@ -1,13 +1,15 @@
 
 local M = {}
 
-M.on_file_open = function(name)
-    return 'require"nvchad-core.lazy_load".on_file_open("'..name..'")';
-end
+-- M.on_file_open = function(name)
+--     return 'require"nvchad-core.lazy_load".on_file_open("'..name..'")';
+-- end
 -- M.on_file_open = require"nvchad-core.lazy_load".on_file_open;
 
 M.create_config = function(name)
-    return "require".."'plugins.configs."..name.."'";
+    local n = "plugins.configs."..name.."";
+    local r =  require(n)
+    return r
     -- return function()
         -- print('asdasd', name)
         -- return require(name);
@@ -39,8 +41,18 @@ M.eunuch_cmds = {
     'SudoEdit',
 }
 
-M.treesitter_cmds = require"nvchad-core.lazy_load".treesitter_cmds;
+M.treesitter_cmds = {
+  "TSInstall",
+  "TSBufEnable",
+  "TSBufDisable",
+  "TSEnable",
+  "TSDisable",
+  "TSModuleInfo",
+}
 
-M.packer_cmds = require"nvchad-core.lazy_load".packer_cmds;
+
+-- M.treesitter_cmds = require"nvchad-core.lazy_load".treesitter_cmds;
+--
+-- M.packer_cmds = require"nvchad-core.lazy_load".packer_cmds;
 
 return M;
