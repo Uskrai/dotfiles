@@ -265,7 +265,7 @@ require("lazy").setup({
         -- }
     },
     {
-        'jose-elias-alvarez/null-ls.nvim',
+        'nvimtools/none-ls.nvim',
         dependencies = {
             'nvim-lspconfig',
             'refactoring.nvim',
@@ -309,7 +309,7 @@ require("lazy").setup({
                 autocmd = { enabled = true },
                 ignore = {
                     ft = {
-                        'null-ls'
+                        'none-ls'
                     }
                 }
             })

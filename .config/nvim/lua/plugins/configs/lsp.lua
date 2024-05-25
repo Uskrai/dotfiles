@@ -108,6 +108,12 @@ require 'lspconfig'.pylsp.setup {
   -- }
 }
 
+require "lspconfig".eslint.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities
+}
+
 require 'lspconfig'.tsserver.setup {
   -- disable_commands = false,
   -- debug = false,
@@ -126,8 +132,8 @@ require 'lspconfig'.denols.setup {
   root_dir = require "lspconfig".util.root_pattern("deno.json"),
   flags = lsp_flags,
   capabilities = capabilities
-
 }
+
 
 require 'lspconfig'.clangd.setup {
   on_attach = on_attach,

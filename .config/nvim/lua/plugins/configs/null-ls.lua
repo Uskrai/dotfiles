@@ -22,11 +22,6 @@ require"null-ls".setup {
     f.black,
     f.fish_indent,
     b.diagnostics.fish,
-    b.diagnostics.eslint.with({
-      condition = function(utils)
-        return utils.root_has_file({".eslintrc.*"})
-      end
-    }),
     -- f.phpcbf,
     -- f.phpcsfixer,
   }

@@ -12,7 +12,7 @@ function M.update_results(lsp_results, ignore_null_ls)
 
   for client_id, result in ipairs(lsp_results) do
     local client = vim.lsp.get_client_by_id(client_id)
-    local is_null = client.name == "null-ls"
+    local is_null = client ~= nil and client.name == "null-ls"
 
     -- Filter null-ls actions as requested
     if not is_null then
