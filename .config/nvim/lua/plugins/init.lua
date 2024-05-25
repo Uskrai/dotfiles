@@ -53,7 +53,13 @@ require("lazy").setup({
     },
     {
         'JoosepAlviste/nvim-ts-context-commentstring',
-        after = 'nvim-treesitter'
+        after = 'nvim-treesitter',
+        setup = function()
+            vim.g.skip_ts_context_commentstring_module = true
+            require('ts_context_commentstring').setup {
+                enable_autocmd = false,
+            }
+        end
     },
     {
         'nvim-treesitter/nvim-treesitter-context',
@@ -116,9 +122,11 @@ require("lazy").setup({
 
     {
         "L3MON4D3/LuaSnip",
+        tag = "v2.2.0", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
         -- opt = true,
         event = on_file_open(),
         config = load_config("luasnip"),
+        build = "make install_jsregexp",
     },
     "rafamadriz/friendly-snippets",
 
@@ -152,8 +160,10 @@ require("lazy").setup({
     {
         'windwp/nvim-autopairs',
         -- opt = true,
-        event = on_file_open(),
-        config = function() require("nvim-autopairs").setup {} end
+        -- event = on_file_open(),
+        config = function()
+            require("nvim-autopairs").setup()
+        end
     },
 
     -- use { 'neoclide/coc-pairs' }
@@ -201,12 +211,12 @@ require("lazy").setup({
     --     -- config = require "lazy_load".create_config "lsp",
     -- },
 
-    -- {
-    --     'lvimuser/lsp-inlayhints.nvim',
-    --     -- config = function()
-    --     --     require("lsp-inlayhints").setup()
-    --     -- end
-    -- },
+    {
+        'lvimuser/lsp-inlayhints.nvim',
+        -- config = function()
+        --     require("lsp-inlayhints").setup()
+        -- end
+    },
 
     "weilbith/nvim-code-action-menu",
 
@@ -215,9 +225,9 @@ require("lazy").setup({
         dependencies = {
             'neovim/nvim-lspconfig',
         },
-        ft = 'rust',
+        -- ft = 'rust',
         -- opt = true,
-        -- after = 'nvim-lspconfig',
+        after = 'nvim-lspconfig',
         config = load_config("rust-tools")
         -- config = require "lazy_load".create_config "rust-tools"
     },
@@ -227,9 +237,9 @@ require("lazy").setup({
         dependencies = {
             'neovim/nvim-lspconfig',
         },
-        config = load_config("flutter-tools")
+        after = 'nvim-lspconfig',
+        config = load_config("flutter-tools"),
         -- opt = true,
-        -- after = 'nvim-lspconfig',
         -- config = require "lazy_load".create_config "flutter-tools"
     },
 
@@ -277,6 +287,7 @@ require("lazy").setup({
         event = on_file_open(),
         config = load_config("nvim-cmp"),
         dependencies = {
+            -- 'windwp/nvim-autopairs',
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-cmdline',
             'hrsh7th/cmp-buffer',
@@ -544,22 +555,22 @@ require("lazy").setup({
     -- "weirongxu/plantuml-previewer.vim",
     "liuchengxu/graphviz.vim",
 
-    -- note taking
-    {
-        'phaazon/mind.nvim',
-        branch = 'v2.2',
-        dependencies = { 'nvim-lua/plenary.nvim' },
-        cmd = {
-            'MindOpenMain',
-            'MindOpenProject',
-            'MindOpenSmartProject',
-            'MindReloadState',
-            'MindClose'
-        },
-        config = function()
-            require 'mind'.setup()
-        end
-    },
+    -- -- note taking
+    -- {
+    --     'phaazon/mind.nvim',
+    --     branch = 'v2.2',
+    --     dependencies = { 'nvim-lua/plenary.nvim' },
+    --     cmd = {
+    --         'MindOpenMain',
+    --         'MindOpenProject',
+    --         'MindOpenSmartProject',
+    --         'MindReloadState',
+    --         'MindClose'
+    --     },
+    --     config = function()
+    --         require 'mind'.setup()
+    --     end
+    -- },
 
     -- use { 'ja-ford/delaytrain.nvim',
     --     config = function()
@@ -569,100 +580,3 @@ require("lazy").setup({
     --     end
     -- };
 })
-
--- return require('packer').startup(function(use)
---     -- -- Packer can manage itself
---     -- use {
---     --     'wbthomason/packer.nvim',
---     --     cmd = require "lazy_load".packer_cmds,
---     --     config = function()
---     --         require "plugins"
---     --     end
---     -- }
---
---     -- Simple plugins can be specified as strings
---     -- use '9mm/vim-closer'
---
---     -- Lazy loading:
---     -- Load on specific commands
---     use {
---         'tpope/vim-dispatch',
---         opt = true,
---         cmd = { 'Dispatch', 'Make', 'Focus', 'Start' }
---     }
---
---
---     -- Load on an autocommand event
---     use {
---         'andymass/vim-matchup',
---         opt = true,
---         -- setup = require "lazy_load".on_file_open "vim-matchup",
---     }
---
---     -- Load on a combination of conditions: specific filetypes or commands
---     -- Also run code after load (see the "config" key)
---     -- use {
---     --  'w0rp/ale',
---     --  ft = {'sh', 'zsh', 'bash', 'c', 'cpp', 'cmake', 'html', 'markdown', 'racket', 'vim', 'tex'},
---     --  cmd = 'ALEEnable',
---     --  config = 'vim.cmd[[ALEEnable]]'
---     -- }
---
---     -- Plugins can have post-install/update hooks
---     use {
---         'iamcco/markdown-preview.nvim',
---         run = 'cd app && yarn install',
---         cmd = 'MarkdownPreview'
---     }
---
---     -- Post-install/update hook with call of vimscript function with argument
---     use {
---         'glacambre/firenvim',
---         opt = true,
---         run = function() vim.fn['firenvim#install'](0) end
---     }
---
---     -- use {
---     -- 'vim-airline/vim-airline'
---     -- }
---
---     -- use 'joshdick/onedark.vim'
---     -- use 'sainnhe/everforest'
---     -- use 'ayu-theme/ayu-vim'
---     -- use 'drewtempelmeyer/palenight.vim'
---     -- use 'sainnhe/sonokai'
---     -- use 'tomasr/molokai'
---     -- use 'morhetz/gruvbox'
---     -- use 'sainnhe/edge'
---     -- use 'dikiaap/minimalist'
---     -- use 'cocopon/iceberg.vim'
---     -- use 'sainnhe/gruvbox-material' // no transparent background on EOL
---     -- use {
---     --     'kaicataldo/material.vim',
---     --     config = function()
---     --         vim.api.nvim_command "colorscheme material"
---     --     end
---     -- }
---     -- use {
---     --     'marko-cerovac/material.nvim',
---     --     config = function()
---     --         require("material").setup {
---     --             disable = {
---     --                 -- colored_cursor = false, -- Disable the colored cursor
---     --                 -- borders = false, -- Disable borders between verticaly split windows
---     --                 background = true, -- Prevent the theme from setting the background (NeoVim then uses your teminal background)
---     --                 -- term_colors = false, -- Prevent the theme from setting terminal colors
---     --                 -- eob_lines = false -- Hide the end-of-buffer lines
---     --             },
---     --
---     --             plugins = {
---     --                 gitsigns = true,
---     --                 nvim_cmp = true,
---     --                 -- telescope = true,
---     --                 indent_blankline = true,
---     --             }
---     --         }
---     --         vim.api.nvim_command "colorscheme material"
---     --     end
---     -- }
--- end)

@@ -77,6 +77,14 @@ local lsp_flags = {
 }
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities();
+
+capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), capabilities, {
+  workspace = {
+    didChangeWatchedFiles = {
+      dynamicRegistration = false
+    }
+  }
+})
 -- local capabilities = require"coq".lsp_ensure_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- require('lspconfig')['pyright'].setup {
@@ -136,17 +144,17 @@ require 'lspconfig'.clangd.setup {
 --[[     ["rust-analyzer"] = {} ]]
 --[[   } ]]
 --[[ } ]]
--- require 'lspconfig'.intelephense.setup {
---   on_attach = on_attach,
---   flags = lsp_flags,
---   capabilities = capabilities,
---   settings = {
---
---   },
---   init_options = {
---     licenceKey = 'CodeCodeCodeCode',
---   }
--- }
+require 'lspconfig'.intelephense.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities,
+  settings = {
+
+  },
+  init_options = {
+    licenceKey = 'CodeCodeCodeCode',
+  }
+}
 
 require 'lspconfig'.zls.setup {
   on_attach = on_attach,

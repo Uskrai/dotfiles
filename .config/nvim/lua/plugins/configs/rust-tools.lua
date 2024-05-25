@@ -18,7 +18,7 @@ rt.setup({
           allFeatures = true,
         },
         checkOnSave = {
-          -- command = "clippy"
+          command = "clippy"
         }
       }
     },

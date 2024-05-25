@@ -1,4 +1,3 @@
-
 local fn = vim.fn
 local install_path = fn.stdpath "data" .. "/site/pack/packer/opt/packer.nvim"
 
@@ -21,6 +20,10 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
+
+vim.g.local_history_exclude = {
+  "~/work/**"
+}
 
 require "plugins"
 
