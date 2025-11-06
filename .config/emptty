@@ -1,0 +1,9 @@
+#!/bin/sh
+Selection=true
+LoginShell=/bin/bash --login
+
+
+. /etc/profile
+. ~/.profile
+
+exec dbus-launch $@
