@@ -11,7 +11,8 @@
 
 set $mod Mod4
 
-set $monin "GDH CHHWJT 0x00000100"
+set $monin "ViewSonic Corporation VX2479 Series X9N233300635"
+set $monout "GDH CHHWJT 0x01000000"
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -26,7 +27,7 @@ font pango:DejaVu Sans Mono 8
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -44,6 +45,16 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
+bindsym $mod+Shift+m+n exec playerctl next
+bindsym $mod+Shift+m+p exec playerctl previous
+bindsym $mod+Shift+m+t exec playerctl play-pause
+
+
+bindsym $mod+Shift+m+s exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+bindsym $mod+Shift+v+r exec swaymsg "output $monin adaptive_sync toggle"
+
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -56,13 +67,16 @@ bindsym $mod+Shift+Ctrl+q exec i3-msg kill
 # bindsym $mod+Shift+q [class="urxvt"] nop
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id rofi -show run
+# bindsym $mod+d exec --no-startup-id wofi --show run
+bindsym $mod+d exec --no-startup-id rofi -run-shell-command "echo $PATH > /home/uskrai/wowow" -modi run -show run
+# bindsym $mod+g exec --no-startup-id env > /home/uskrai/owo
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
+bindsym $mod+g exec swaymsg -t get_tree > ~/tree 
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
@@ -136,6 +150,17 @@ set $ws17 "17"
 set $ws18 "18"
 set $ws19 "19"
 set $ws20 "20"
+
+bindsym $mod+Shift+Ctrl+Mod1+1 exec input-remapper-control --device "SHANWAN Android Gamepad" --command start --preset default
+bindsym $mod+Shift+Ctrl+Mod1+2 exec input-remapper-control --device "SHANWAN Android Gamepad" --command start --preset firefox
+bindsym $mod+Shift+Ctrl+Mod1+3 exec input-remapper-control --device "SHANWAN Android Gamepad" --command start --preset empty
+
+bindsym $mod+Shift+Ctrl+Up exec ~/script/sway/change-workspace.sh up
+bindsym $mod+Shift+Ctrl+Down exec ~/script/sway/change-workspace.sh down
+bindsym $mod+Shift+Ctrl+Left exec ~/script/sway/change-workspace.sh left
+bindsym $mod+Shift+Ctrl+Right exec ~/script/sway/change-workspace.sh right
+bindsym $mod+Shift+Ctrl+Mod1+Up+2 exec ~/script/sway/change-workspace.sh up && input-remapper-control --device "SHANWAN Android Gamepad" --command start --preset firefox
+# bindsym $mod+Ctrl+Return kitty
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -251,14 +276,51 @@ bar {
 #custom autostart
 exec --no-startup-id ~/script/autostart.sh
 
-exec_always xautolock -time 10 -locker ~/script/lock-screen.sh
+# exec_always xautolock -time 10 -locker ~/script/lock-screen.sh
+# exec_always swayidle -dw \
+#   timeout 2 '~/script/touch.sh' resume 'dunstctl set-paused false'
+
+exec swayidle -dw \
+  timeout 150 '~/script/lock-screen.sh' resume 'dunstctl set-paused false'\
+  timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
+
+
+for_window [class=".*"] inhibit_idle fullscreen
+for_window [class="steam_app.*"] inhibit_idle focus
+for_window [class="RimWorldLinux"] inhibit_idle focus
+for_window [title=".*Wuthering Waves.*"] inhibit_idle focus
+for_window [class="client-win64-shipping.exe"] inhibit_idle focus
+for_window [class="zenlesszonezero\.exe"] inhibit_idle focus
+
+for_window [class="^steam$"] move window to workspace 3
+for_window [class="steam_app.*"] move window to workspace 4
+# for_window [class="steam_proton.*"] move window to workspace 4
+for_window [class="steam_app.*"] move window to workspace 4
+for_window [class="Paradox Launcher"] move window to workspace 4
+for_window [class="discord"] move window to workspace 12
+for_window [app_id="vesktop"] move window to workspace 12
+for_window [class="stellaris"] move window to workspace 4
+for_window [class="RimWorldLinux"] move window to workspace 4
+for_window [title="SteamTinkerLaunch-OpenSettings"] move window to workspace 4
+for_window [class="zenlesszonezero\.exe"] move window to workspace 4
+for_window [class="hollow_knight\.x86_64"] move window to workspace 4
+for_window [class="Hollow Knight Silksong"] move window to workspace 4
+for_window [class="osu\!"] move window to workspace 4
+for_window [app_id="[Ff]irefox" title="\[youtube\].*"] move window to workspace 12
+for_window [app_id="[Ff]irefox" title="\[novel|noveldl\].*"] move window to workspace 13
+for_window [app_id="[Ff]irefox" title="\[manga\].*"] move window to workspace 13
+
+for_window [title="Zellij \(dling\).*"] move window to workspace 19
+for_window [app_id="org\.qbittorrent\.qBittorrent"] move window to workspace 17
+for_window [title="^HoYoPlay$"] floating disable
+
 bindsym --release $mod+Ctrl+l exec xautolock -locknow
 bindsym --release $mod+Mod1+l exec ~/script/rofi-lock-screen-mode.sh
 
 # scerenshot
 bindsym Print exec ~/script/screenshot.sh
 bindsym Shift+Print exec ~/script/screenshot-region.sh
-bindsym Ctrl+Print exec ~/script/screenshot-current-output.sh
+bindsym Ctrl+Print exec ~/script/screenshot-current-window.sh
 bindsym Shift+Ctrl+Print exec ~/script/screenshot-delay.sh
 bindsym $mod+Tab focus right
 bindsym $mod+Shift+Tab focus left
@@ -267,9 +329,29 @@ bindsym $mod+Shift+Tab focus left
 assign [title="^zoom$"] zoom_notif
 no_focus [title="^zoom$"]
 
+assign [title="Origin"] origin_notif
+no_focus [title="Origin"]
+
+assign [title="Wine System Tray"] wine_tray
+no_focus [title="Wine System Tray"]
+
 # exec_always xrandr --output $(xrandr | grep -m 1 XWAYLAND | awk '{print $1;}') --primary
 
 # output $monin poF 0 0 res 1920x1080
 output $monin {
-  mode 1920x1080@60hz
+  mode 1920x1080@144hz
+  # adaptive_sync on
+  position 0,0
 }
+
+output $monout {
+  # mode 1920x1080@60hz
+  subpixel rgb
+  # scale_filter linear
+  # mode 1440x900@0hz
+}
+
+input "5426:163:Razer_Razer_Cobra" {
+  accel_profile "flat"
+  # pointer_accel 0.5
+} 
