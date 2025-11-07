@@ -65,7 +65,9 @@ export WINEPREFIX="$HOME/.wine"
 export CHROME_EXECUTABLE=chromium
 export MANGOHUD=0
 
-export PATH="$CARGO_HOME/bin:$PATH"
+export PNPM_HOME=$XDG_DATA_HOME/pnpm
+
+export PATH="$CARGO_HOME/bin:$PNPM_HOME:$PATH"
 export PATH="$HOME/bin:/usr/local/bin:$XDG_DATA_HOME/gem/ruby/2.7.0/bin:$PATH"
 export PATH="$HOME/.yarn/bin/:$HOME/.config/composer/vendor/bin:$HOME/.local/bin/:$PATH"
 export PATH=""/opt/clang-format-static/:$PATH""
