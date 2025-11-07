@@ -33,6 +33,8 @@ font pango:DejaVu Sans Mono 8
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+exec --no-startup-id blueman-applet
+
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 3 && $refresh_i3status
@@ -62,8 +64,8 @@ floating_modifier $mod
 bindsym $mod+Return exec kitty
 
 # kill focused window
-bindsym $mod+Shift+q exec ~/script/kill.sh
-bindsym $mod+Shift+Ctrl+q exec i3-msg kill
+bindsym $mod+Shift+q exec swaymsg kill
+bindsym $mod+Shift+Ctrl+q exec swaymsg kill
 # bindsym $mod+Shift+q [class="urxvt"] nop
 
 # start dmenu (a program launcher)
@@ -235,7 +237,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'swaymsg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
