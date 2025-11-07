@@ -1,0 +1,6 @@
+// vim:ft=css
+configuration {
+
+}
+
+@theme "/usr/share/rofi/themes/solarized.rasi"
