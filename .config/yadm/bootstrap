@@ -9,22 +9,18 @@ dir=$(dirname $BASH_SOURCE)
 echo "Init submodules"
 yadm submodule update --recursive --init
 
-INSTALL_PACMAN="
-  neovim # code editor
-  alacritty # terminal
-  zsh # shell because fish suck
-  picom # windows compositor
-  maim # screenshot
-  exa # ls replacement
-  dunst # notification
-  playerctl # play-pause, stop,next and prev button
-"
+PACMAN_INSTALL=(
+	neovim kitty fish
+	eza zoxide fisher 
+	fzf mcfly direnv ripgrep
 
-sudo pacman -S $INSTALL_PACMAN
+	emptty dunst sway 
+	waybar picom wl-copy
 
-ZSH=~/.local/share/oh-my-zsh sh "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	networkmanager network-manager-applet
+	zellij tmux
+)
 
-source $(dir)/ohz-plugin
-
+sudo pacman -S "${PACMAN_INSTALL[@]}"
 # bootstrap putty so ~/.putty not created
-mkdir ${XDG_CONFIG_HOME}/config/putty -p
+mkdir ${XDG_CONFIG_HOME}/putty -p
