@@ -1,0 +1,18 @@
+#!/bin/bash
+
+getdest() {
+	DIRDEST=$1
+	if [[ ! -d $DIRDEST ]]; then
+		DIRDEST=$(dirname $DIRDEST)
+	fi
+
+	echo $DIRDEST
+}
+
+start() {
+	touch -r $DIRDEST /tmp/touch-ref
+}
+
+end() {
+	touch -r /tmp/touch-ref $DIRDEST
+}

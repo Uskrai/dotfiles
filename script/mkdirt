@@ -1,0 +1,5 @@
+#!/bin/bash
+
+touch -r . /tmp/mtime-rmt
+mkdir $@
+touch -r /tmp/mtime-rmt .

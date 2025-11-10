@@ -1,0 +1,4 @@
+*log*
+venv
+.mypy_cache
+private

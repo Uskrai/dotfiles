@@ -1,0 +1,8 @@
+#!/bin/bash
+
+source ~/script/notouch
+
+DEST="${@: -1}"
+start "$DEST"
+cp -a $@
+end "$DEST"
