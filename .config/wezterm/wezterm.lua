@@ -11,6 +11,7 @@ config.colors = colors
 config.window_background_opacity = 0.9
 config.enable_tab_bar = false
 
+config.font = wezterm.font 'Fira Code'
 config.font_size = 11
 
 return config
