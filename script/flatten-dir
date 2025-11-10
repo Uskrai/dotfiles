@@ -1,0 +1,4 @@
+#!/bin/sh
+source ~/script/venv/bin/activate
+
+python ~/script/flatten-dir.py $@

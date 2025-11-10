@@ -1,0 +1,9 @@
+#!/bin/bash
+
+source ~/script/notouch
+
+DEST="${@: -1}"
+DIRDEST=$(getdest $dest)
+start $DIRDEST
+mv $@
+end $DIRDEST
