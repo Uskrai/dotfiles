@@ -15,7 +15,7 @@ PACMAN_INSTALL=(
 	fzf mcfly direnv ripgrep
 
 	emptty dunst sway 
-	waybar picom wl-copy
+	waybar picom wl-clipboard
 
 	networkmanager network-manager-applet
 	zellij tmux
