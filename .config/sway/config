@@ -71,13 +71,13 @@ bindsym $mod+Shift+Ctrl+q exec swaymsg kill
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id wofi --show run
 bindsym $mod+d exec --no-startup-id rofi -modi run -show run
+bindsym $mod+g exec --no-startup-id ~/script/rofi/input-remapper.sh
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
-bindsym $mod+g exec swaymsg -t get_tree > ~/tree 
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
