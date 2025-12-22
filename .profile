@@ -8,7 +8,10 @@ export HOME_PROFILE_INIT="$PROCESS"
 # export QT_STYLE_OVERRIDE=adwaita-dark
 export QT_QPA_PLATFORMTHEME=qt5ct:qt6ct
 export QT_QPA_PLATFORM=wayland
+
 export EDITOR=nvim
+export PAGER=bat
+export BAT_PAGER="less -RFX"
 
 export GTK_THEME=Adwaita:dark
 export CALIBRE_USE_DARK_PALETTE=1
