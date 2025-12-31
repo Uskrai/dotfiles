@@ -1,0 +1,14 @@
+[user]
+name = "Muhammad Fathurrohim"
+email = "m.faturrohim13@gmail.com"
+
+[signing]
+sign-all = true
+backend = "gpg"
+
+[ui]
+pager = "bat"
+show-cryptographic-signatures = true
+
+
+#:schema https://jj-vcs.github.io/jj/latest/config-schema.json

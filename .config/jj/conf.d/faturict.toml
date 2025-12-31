@@ -1,0 +1,8 @@
+--when.hostnames = ["faturict"]
+
+[signing]
+key = "B6A1DB95476AD79FDF5D56BFB682EC5EC403F699"
+
+[user]
+name = "Muhammad Fathurrohim"
+email = "m.faturrohim13@gmail.com"
