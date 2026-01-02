@@ -61,7 +61,7 @@ bindsym $mod+Shift+v+r exec swaymsg "output $monin adaptive_sync toggle"
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec wezterm
 
 # kill focused window
 bindsym $mod+Shift+q exec swaymsg kill
