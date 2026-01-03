@@ -1,0 +1,43 @@
+# vim: set ft=swayconfig
+
+set {
+  $game move window to workspace 4; inhibit_idle focus;
+}
+
+for_window {
+
+  # game
+  [app_id=".*\.exe"] $game;
+  [class="steam_app.*"] $game;
+  [class="RimWorldLinux"] $game;
+  [title=".*Wuthering Waves.*"] $game;
+  [class="client-win64-shipping.exe"] $game;
+  [class="zenlesszonezero\.exe"] $game;
+  [title="^Counter-Strike 2$"] $game;
+  [title="Left 4 Dead 2 - Vulkan"] $game;
+  # for_window [class="steam_proton.*"] move window to workspace 4
+  [class="Paradox Launcher"] $game;
+  #
+  # [class="stellaris"] $game;
+  # [class="RimWorldLinux"] $game;
+  # [title="SteamTinkerLaunch-OpenSettings"] $game;
+  # [class="zenlesszonezero\.exe"] $game;
+  # [class="hollow_knight\.x86_64"] $game;
+  # [class="Hollow Knight Silksong"] $game;
+  # [class="osu\!"] $game;
+  # # [fullscreen=1] $game;
+
+  [class=".*"] inhibit_idle fullscreen;
+
+  # for specific workspace
+  [class="^steam$"] move window to workspace 3
+  [instance="steamwebhelper"] move window to workspace 3
+  [class="discord"] move window to workspace 12
+  [app_id="vesktop"] move window to workspace 12
+  [app_id="[Ff]irefox" title="\[youtube\].*"] move window to workspace 12
+  [app_id="[Ff]irefox" title="\[novel|noveldl\].*"] move window to workspace 13
+  [app_id="[Ff]irefox" title="\[manga\].*"] move window to workspace 13
+  [title="Zellij \(dling\).*"] move window to workspace 19
+  [app_id="org\.qbittorrent\.qBittorrent"] move window to workspace 17
+  [title="^HoYoPlay$"] floating disable
+}
