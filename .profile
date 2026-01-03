@@ -25,8 +25,7 @@ export XDG_BIN_HOME="$HOME/.local/bin"
 export XDG_LIB_HOME="$HOME/.local/lib"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
-
-export XDG_CURRENT_DESKTOP=sway
+export XDG_STATE_HOME="$HOME/.local/state"
 
 export DENO_INSTALL="${XDG_BIN_HOME%/bin}"
 
@@ -59,23 +58,25 @@ alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
 
 export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
 
-export LD_LIBRARY_PATH="/usr/local/lib:/usr/lib:/usr/lib64/jvm/default/lib/:/usr/lib64/jvm/default/lib/server:/usr/lib64/jvm/default/jre/lib/amd64/server"
+export LD_LIBRARY_PATH="/usr/local/lib:/usr/lib:/usr/lib32:/usr/lib64/jvm/default/lib/:/usr/lib64/jvm/default/lib/server:/usr/lib64/jvm/default/jre/lib/amd64/server:$LD_LIBRARY_PATH"
 
 export GPG_TTY=$(tty)
 export PINENTRY_USER_DATA=USE_TTY=1
 export WINEPREFIX="$HOME/.wine"
 
 export CHROME_EXECUTABLE=chromium
-export MANGOHUD=0
+export MANGOHUD=1
+export MANGOHUD_LOG=1
 
 export PNPM_HOME=$XDG_DATA_HOME/pnpm
 
 export PATH="$CARGO_HOME/bin:$PNPM_HOME:$PATH"
 export PATH="$HOME/bin:/usr/local/bin:$XDG_DATA_HOME/gem/ruby/2.7.0/bin:$PATH"
-export PATH="$HOME/.yarn/bin/:$HOME/.config/composer/vendor/bin:$HOME/.local/bin/:$PATH"
+export PATH="$HOME/.yarn/bin/:$HOME/.config/composer/vendor/bin:$PATH"
 export PATH=""/opt/clang-format-static/:$PATH""
 export PATH="$PATH:$HOME/lib/cg_clif-x86_64-unknown-linux-gnu/dist/bin"
 export PATH="$XDG_DATA_HOME/fvm/default/bin:$HOME/.pub-cache/bin:$PATH"
+export PATH="$XDG_BIN_HOME:$PATH"
 
 export MOZ_ENABLE_WAYLAND=1
 
