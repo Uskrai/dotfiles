@@ -10,14 +10,18 @@ echo "Init submodules"
 yadm submodule update --recursive --init
 
 PACMAN_INSTALL=(
-	neovim kitty fish
-	eza zoxide fisher 
+	neovim wezterm fish
+	eza zoxide fisher
 	fzf mcfly direnv ripgrep
+	logrotate
 
-	emptty dunst sway 
+	emptty dunst sway
 	waybar picom wl-clipboard
+	grim maim
+	playerctl
 
 	networkmanager network-manager-applet
+	bluez blueman # bluetooth
 	zellij tmux
 )
 

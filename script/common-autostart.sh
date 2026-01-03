@@ -3,11 +3,11 @@ echo "calling common-autostart" >> ~/script/dynamic-wm.log
 dunst &
 
 # applet
-# blueman-applet &
+blueman-applet &
 nm-applet &
 
 # steam -silent &
-discord --start-minimized &
+# discord --start-minimized &
 
 # ibus-daemon --daemonize --xim
 
