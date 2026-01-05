@@ -11,7 +11,7 @@ local wlr_renderer = os.getenv("WLR_RENDERER")
 
 local is_wlr_vulkan = false
 if wlr_renderer ~= nil then
-	local is_wlr_vulkan = string.find(wlr_renderer, "vulkan")
+	is_wlr_vulkan = string.find(wlr_renderer, "vulkan") ~= nil
 end
 
 config.front_end = "WebGpu"
