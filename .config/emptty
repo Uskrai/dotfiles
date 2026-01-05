@@ -4,6 +4,7 @@ LoginShell=/bin/bash --login
 
 
 . /etc/profile
+. ~/.zshenv
 . ~/.profile
 
 exec dbus-launch $@
