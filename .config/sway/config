@@ -330,4 +330,5 @@ input "5426:163:Razer_Razer_Cobra" {
 
 include {
   modules/*
+  /etc/sway/config.d/*
 }
