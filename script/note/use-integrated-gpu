@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# first
+MESA_VK_DEVICE_SELECT=list vulkaninfo
+
+# then with exclamation mark
+MESA_VK_DEVICE_SELECT=vendorID:deviceID! %command%
+
+# or this if vkd3d
+VKD3D_FILTER_DEVICE_NAME=name %command%
+
+# or
+VKD3D_VULKAN_DEVICE=0 %command%
+
