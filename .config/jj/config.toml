@@ -3,12 +3,15 @@ name = "Muhammad Fathurrohim"
 email = "m.faturrohim13@gmail.com"
 
 [signing]
-sign-all = true
 backend = "gpg"
+behavior = "keep"
 
 [ui]
 pager = "bat"
 show-cryptographic-signatures = true
+
+[git]
+sign-on-push = true
 
 
 #:schema https://jj-vcs.github.io/jj/latest/config-schema.json
