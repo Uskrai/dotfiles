@@ -285,8 +285,7 @@ exec swayidle -dw \
   timeout 150 '~/script/lock-screen.sh' resume 'dunstctl set-paused false'\
   timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
 
-
-bindsym --release $mod+Ctrl+l exec xautolock -locknow
+bindsym --release $mod+Ctrl+l exec pkill -10 swayidle
 bindsym --release $mod+Mod1+l exec ~/script/rofi-lock-screen-mode.sh
 
 # scerenshot
