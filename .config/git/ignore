@@ -1,0 +1,16 @@
+.autoenv.zsh
+rust-analyzer.log
+.rgignore
+_ide_helper.php
+_ide_helper_models.php
+.php-cs-fixer.cache
+.phpstorm.meta.php
+.envrc
+vim.log
+.remote
+.envdir
+backup
+testing.*
+testing
+venv
+pnpm-lock.yaml
