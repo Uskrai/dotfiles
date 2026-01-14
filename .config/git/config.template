@@ -1,0 +1,8 @@
+# vim: set ft=gitconfig
+
+[include]
+  path = config.global
+
+# declare stuff after include to override config.global
+[user]
+  signingkey = "example"

@@ -1,12 +1,13 @@
+# vim: set ft=gitconfig
 [init]
 	defaultBranch = master
 [core]
 	fileMode = false
 	editor = nvim
+	excludesfile = ~/.config/git/ignore
 [user]
 	email = m.faturrohim13@gmail.com
 	name = Muhammad Fathurrohim
-	signingkey = BE8753E8DE8C41DF
 
 [diff]
 	tool = nvimdiff
@@ -14,7 +15,3 @@
 	cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [commit]
 	gpgsign = true
-[safe]
-	directory = .
-	directory = /mnt/e/project/pbo/Tubes
-	directory = /mnt/e/project/pascal/FMD2
