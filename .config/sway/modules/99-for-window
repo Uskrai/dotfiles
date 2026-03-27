@@ -17,6 +17,7 @@ for_window {
   [title="Left 4 Dead 2 - Vulkan"] $game;
   # for_window [class="steam_proton.*"] move window to workspace 4
   [class="Paradox Launcher"] $game;
+  [class="factorio"] $game;
   #
   # [class="stellaris"] $game;
   # [class="RimWorldLinux"] $game;
