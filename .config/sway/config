@@ -37,6 +37,8 @@ exec --no-startup-id nm-applet
 
 exec --no-startup-id blueman-applet
 
+exec --no-startup-id dex -a
+
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 3 && $refresh_i3status
