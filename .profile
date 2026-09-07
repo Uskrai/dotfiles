@@ -65,7 +65,7 @@ export PINENTRY_USER_DATA=USE_TTY=1
 export WINEPREFIX="$HOME/.wine"
 
 export CHROME_EXECUTABLE=chromium
-export MANGOHUD=1
+# export MANGOHUD=1
 export MANGOHUD_LOG=1
 
 export PNPM_HOME=$XDG_DATA_HOME/pnpm
