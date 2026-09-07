@@ -1,0 +1,19 @@
+layout {
+    /* pane */
+    
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+
+        pane split_direction="vertical" {
+            pane command="nvim" close_on_exit=false
+            pane split_direction="horizontal" {
+                pane
+                pane
+            }
+        }
+
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+}
