@@ -16,9 +16,8 @@ grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') /tmp/
 # Pixellate it 10x
 mogrify -scale 10% -scale 1000% /tmp/screen_locked.png
 
-log "Pagse dunstctl"
 # Pause dunstctl
-dunstctl set-paused true
+# dunstctl set-paused true
 
 # Lock screen displaying this image.
 # PID=`sh -c 'echo $$; exec swaylock --daemonize -i /tmp/screen_locked.png'`;
@@ -28,7 +27,7 @@ swaylock --daemonize -i /tmp/screen_locked.png
 # tail --pid=$PID -f /dev/null;
 # dunstctl set-paused false
 
-log "end locking"
+# log "end locking"
 
 #kill_and_unpause_notifications() {
   #pkill -xu $EUID i3lock
