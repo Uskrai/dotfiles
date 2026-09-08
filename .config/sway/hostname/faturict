@@ -1,0 +1,8 @@
+# vim: set ft=swayconfig
+
+set $monin "Lenovo Group Limited L22e-40 UTW1AG79"
+set $monout "HP Inc. HP P204v 3CQ92311M6"
+
+output "Lenovo Group Limited L22e-40 UTW1AG79" {
+  position 0,0
+}
