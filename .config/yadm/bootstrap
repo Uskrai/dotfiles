@@ -28,8 +28,12 @@ PACMAN_INSTALL=(
 	zellij tmux # multiplexer
 
 	jj difftastic delta
+
+	openssh
 )
 
 sudo pacman -S "${PACMAN_INSTALL[@]}"
 # bootstrap putty so ~/.putty not created
 mkdir ${XDG_CONFIG_HOME}/putty -p
+
+systemctl --user enable ssh-agent

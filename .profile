@@ -81,6 +81,7 @@ export PATH="$XDG_BIN_HOME:$PATH"
 export MOZ_ENABLE_WAYLAND=1
 
 export RUST_LOG=info
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 export OBS_VKCAPTURE=1
 # export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
