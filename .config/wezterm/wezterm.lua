@@ -27,5 +27,6 @@ config.enable_tab_bar = false
 
 config.font = wezterm.font("FiraCode Nerd Font")
 config.font_size = 11
+config.ssh_backend = "Ssh2"
 
 return config
