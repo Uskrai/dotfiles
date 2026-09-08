@@ -9,6 +9,7 @@ behavior = "keep"
 [ui]
 pager = "bat"
 show-cryptographic-signatures = true
+diff-formatter = ["difft", "--color=always", "$left", "$right"]
 
 [git]
 sign-on-push = true
