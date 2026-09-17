@@ -304,9 +304,6 @@ bindsym $mod+Shift+Tab focus left
 assign [title="^zoom$"] zoom_notif
 no_focus [title="^zoom$"]
 
-assign [title="Origin"] origin_notif
-no_focus [title="Origin"]
-
 assign [title="Wine System Tray"] wine_tray
 no_focus [title="Wine System Tray"]
 
