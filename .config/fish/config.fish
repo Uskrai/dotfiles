@@ -14,6 +14,7 @@ if status is-interactive
 end
 
 fenv source ~/.profile
+set -gx GPG_TTY (tty)
 
 function cdl --wraps='cd' --description 'go to last working directory'
     cd "$LAST_WORKING_DIR"
@@ -25,6 +26,14 @@ end
 
 function dlv --wraps='yt-dlp'
     yt-dlp -S "res:480" $argv
+end
+
+function zc --wraps="zellij" --description 'Zellij: attach or create session named after cwd'
+    zellij attach -c "$(basename $(pwd))" $argv
+end
+
+function tc --wraps="tmux" --description 'tmux: attach or create session named after cwd'
+    tmux new -A -s "$(basename $(pwd))" $argv
 end
 
 # function sway
