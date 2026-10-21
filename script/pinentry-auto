@@ -2,16 +2,23 @@
 
 set -Ceu
 
-# pi TUI / Zellij: curses don't work well there. Zellij sets $ZELLIJ=0
+# Zellij: curses don't work well there. Zellij sets $ZELLIJ=0
 # inside a session or session name when nested, so any non-empty value counts.
-if [[ "${PI_CODING_AGENT-}" == "true" || -n "${ZELLIJ-}" ]]; then
-	exec pinentry-qt "$@"
+if [[ -n "${ZELLIJ-}" && -x $(command -v pinentry-zellij) ]]; then
+	# https://github.com/likewhatevs/pinentry-zellij
+	exec pinentry-zellij "$@"
 	return
 fi
+
+# if [[ -n "${TMUX}" ]]; then
+# 	exec pinentry-tmux "$@"
+# 	return
+# fi
+
 
 if [[ "${PINENTRY_USER_DATA-}" == *USE_TTY=1* ]]; then
 	exec pinentry-curses "$@"
 	return
 fi
 
-exec pinentry-qt "$@"
+exec pinentry-curses "$@"
