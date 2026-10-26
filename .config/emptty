@@ -7,4 +7,7 @@ LoginShell=/bin/bash --login
 . ~/.zshenv
 . ~/.profile
 
-exec dbus-launch $@
+# messing up $DBUS_SESSION_BUS_ADDRESS
+# needed for running podman
+
+exec $@
