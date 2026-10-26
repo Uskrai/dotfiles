@@ -1,7 +1,8 @@
+# set GPG_TTY properly in your shell config (export GPG_TTY=$(tty))
+
 PROCESS=$(ps -o comm= $PPID)
-if [[ $HOME_PROFILE_INIT == $PROCESS ]] 
-then
-  return
+if [[ $HOME_PROFILE_INIT == $PROCESS ]]; then
+	return
 fi
 export HOME_PROFILE_INIT="$PROCESS"
 
@@ -29,7 +30,7 @@ export XDG_STATE_HOME="$HOME/.local/state"
 
 export DENO_INSTALL="${XDG_BIN_HOME%/bin}"
 
-# export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java 
+# export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 export MACHINE_STORAGE_PATH="$XDG_DATA_HOME"/docker-machine
@@ -47,7 +48,7 @@ export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
 export GOPATH="$XDG_DATA_HOME"/go
 export PERF_BUILDID_DIR="$XDG_DATA_HOME"/debug
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
-export NUGET_PACKAGES="$XDG_CACHE_HOME"/NuGetPackages 
+export NUGET_PACKAGES="$XDG_CACHE_HOME"/NuGetPackages
 
 export TEXMFHOME=$XDG_DATA_HOME/texmf
 export TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var
@@ -60,8 +61,6 @@ export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
 
 export LD_LIBRARY_PATH="/usr/local/lib:/usr/lib:/usr/lib32:/usr/lib64/jvm/default/lib/:/usr/lib64/jvm/default/lib/server:/usr/lib64/jvm/default/jre/lib/amd64/server:$LD_LIBRARY_PATH"
 
-export GPG_TTY=$(tty)
-# export PINENTRY_USER_DATA=USE_TTY=1
 export WINEPREFIX="$HOME/.wine"
 
 export CHROME_EXECUTABLE=chromium
@@ -71,7 +70,7 @@ export MANGOHUD_LOG=1
 export PNPM_HOME=$XDG_DATA_HOME/pnpm
 
 export PATH="$XDG_DATA_HOME/mise/shims/:$PATH"
-export PATH="$CARGO_HOME/bin:$PNPM_HOME/bin:$PATH"
+export PATH="$CARGO_HOME/bin:$PNPM_HOME/bin:$XDG_DATA_HOME/npm/bin:$PATH"
 export PATH="$HOME/bin:/usr/local/bin:$XDG_DATA_HOME/gem/ruby/2.7.0/bin:$PATH"
 export PATH="$HOME/.yarn/bin/:$HOME/.config/composer/vendor/bin:$PATH"
 export PATH=""/opt/clang-format-static/:$PATH""
@@ -87,11 +86,15 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export OBS_VKCAPTURE=1
 # export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
-export USER_UID=`id -u`
-export USER_GID=`id -g`
+export USER_UID=$(id -u)
+export USER_GID=$(id -g)
 
 export DIRENV_WARN_TIMEOUT=0
 export ALIASES_DIR=$HOME/project/aliases
+
+# 7 day
+export PNPM_CONFIG_MINIMUM_RELEASE_AGE=10080
+export NPM_CONFIG_MIN_RELEASE_AGE=7
 
 alias lsc="/usr/bin/ls"
 alias ls="eza"
