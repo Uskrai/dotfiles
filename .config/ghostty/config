@@ -50,6 +50,6 @@
 font-family = "FiraCode Nerd Font Mono"
 font-size = 11
 
-background-opacity = 0.1
+background-opacity = 0.85
 
-theme = "Github Dark Default"
+theme = "GitHub Dark"
