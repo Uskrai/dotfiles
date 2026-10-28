@@ -61,7 +61,7 @@ export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
 export LD_LIBRARY_PATH="/usr/local/lib:/usr/lib:/usr/lib32:/usr/lib64/jvm/default/lib/:/usr/lib64/jvm/default/lib/server:/usr/lib64/jvm/default/jre/lib/amd64/server:$LD_LIBRARY_PATH"
 
 export GPG_TTY=$(tty)
-export PINENTRY_USER_DATA=USE_TTY=1
+# export PINENTRY_USER_DATA=USE_TTY=1
 export WINEPREFIX="$HOME/.wine"
 
 export CHROME_EXECUTABLE=chromium
@@ -96,3 +96,7 @@ export ALIASES_DIR=$HOME/project/aliases
 alias lsc="/usr/bin/ls"
 alias ls="eza"
 alias l="ls -la"
+
+if [ -f ~/.profile.local ]; then
+  source ~/.profile.local
+fi
