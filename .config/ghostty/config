@@ -3,9 +3,16 @@ font-size = 11
 
 background-opacity = 0.9
 
+
 theme = "GitHub Dark Default"
 
 window-show-tab-bar = never
+app-notifications = "no-clipboard-copy"
+working-directory = "home"
+window-inherit-working-directory = false
+scrollbar = never
+
+cursor-style = bar
 
 keybind = ctrl+shift+t=unbind
 keybind = ctrl+shift+w=unbind
