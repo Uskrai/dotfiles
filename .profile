@@ -54,6 +54,9 @@ export TEXMFHOME=$XDG_DATA_HOME/texmf
 export TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var
 export TEXMFCONFIG=$XDG_CONFIG_HOME/texlive/texmf-config
 
+export ATUIN_CONFIG_DIR=$XDG_CONFIG_HOME/atuin
+export ATUIN_HOME=$XDG_DATA_HOME/atuin
+
 # alias
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
 

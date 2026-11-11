@@ -14,7 +14,7 @@ PACMAN_INSTALL=(
 	eza zoxide fisher
 	fzf mcfly direnv ripgrep
 	logrotate imagemagick rsync
-	fd jq bc
+	fd jq bc atuin
 
 	emptty dunst 
 	sway swayidle waybar swaylock
