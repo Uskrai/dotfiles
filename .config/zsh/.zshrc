@@ -22,9 +22,6 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
-zinit ice wait"1" silent
-zinit light "zsh-users/zsh-syntax-highlighting"
-
 zinit ice as"program" from"gh-r" pick"zsh-patina-*/zsh-patina" atload'eval "$(zsh-patina activate)"'
 zinit light michel-kraemer/zsh-patina
 
@@ -64,3 +61,17 @@ esac
 
 eval "$(starship init zsh)"
 eval "$(atuin init zsh --disable-up-arrow)"
+
+# vi mode (replaces hand-rolled keymap hooks)
+function zvm_config() {
+    # cursor shapes already default to block (normal) / beam (insert)
+    ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+}
+zinit ice depth=1
+zinit light jeffreytse/zsh-vi-mode
+
+# zsh-vi-mode rebinds keys on init; re-apply the plugin bindings it overrides
+zvm_after_init_commands+=('bindkey "^I" fzf-tab-complete')
+zvm_after_init_commands+=('bindkey -M viins "^R" atuin-search-viins')
+
+KEYTIMEOUT=1
