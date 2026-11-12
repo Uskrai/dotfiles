@@ -1,0 +1,318 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+
+# One line: os │ dir │ vcs (jj if present, else git) │ ─── fill ─── │ ▼ │ node │ time
+format = """
+[](bold white)$os\
+$hostname\
+[](bold cyan)$directory\
+$vcs\
+[](bold black)$fill\
+$cmd_duration\
+$status\
+$jobs\
+$buf\
+$bun\
+$c\
+$cmake\
+$cobol\
+$cpp\
+$crystal\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$fortran\
+$golang\
+$gradle\
+$haskell\
+$haxe\
+$java\
+$julia\
+$kotlin\
+$lua\
+$maven\
+$meson\
+$nim\
+$nodejs\
+$ocaml\
+$opa\
+$perl\
+$php\
+$purescript\
+$python\
+$raku\
+$red\
+$rlang\
+$ruby\
+$rust\
+$scala\
+$solidity\
+$swift\
+$vlang\
+$xmake\
+$zig\
+$time\
+$line_break\
+$custom"""
+
+# jj wins over git when the directory is a jj repo
+[vcs]
+order = ["jj", "git", "hg", "pijul", "fossil"]
+git_modules = "$git_branch$git_commit$git_state$git_metrics$git_status"
+
+[os]
+disabled = false
+style = "bold white"
+format = "[$symbol]($style)"
+[os.symbols]
+Arch = "\uf303 "
+
+[directory]
+style = "bold cyan"
+format = "[  $path]($style)  "
+truncation_length = 0
+truncate_to_repo = false
+
+[git_branch]
+symbol = "\uf1d3 "
+style = "bold green"
+format = "[$symbol$branch]($style)  "
+
+[git_commit]
+format = "[@$hash]($style)  "
+style = "bold yellow"
+commit_hash_length = 7
+only_detached = false
+
+[jj_bookmark]
+symbol = "\uf1d3 "
+style = "bold green"
+format = "[$symbol$bookmark]($style)  "
+
+[jj_change]
+format = "[@](bold yellow)$change  "
+prefix_style = "bold yellow"
+suffix_style = "bold yellow"
+change_hash_length = 7
+
+[fill]
+symbol = "─"
+style = "bold black"
+
+
+[time]
+disabled = false
+time_format = "%H:%M:%S"
+style = "bold white"
+format = "[$time]($style)"
+
+
+[buf]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[bun]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[c]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+commands = []
+
+[cmake]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[cobol]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[cpp]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+commands = []
+
+[crystal]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[daml]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[dart]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[deno]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[dotnet]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[elixir]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[elm]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[erlang]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[fennel]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[fortran]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[golang]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[gradle]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[haskell]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[haxe]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[java]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[julia]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[kotlin]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[lua]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[maven]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[meson]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[nim]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[nodejs]
+symbol = "\ue718 "
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[ocaml]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[opa]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[perl]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[php]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[purescript]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[python]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[raku]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[red]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[rlang]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[ruby]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[rust]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[scala]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[solidity]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[swift]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[vlang]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[xmake]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[zig]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[hostname]
+format = "[$ssh_symbol$hostname]($style) in"
+
+# classic shell indicator at the typing position: > for you, # for root
+[custom.prompt_user]
+when = 'test "$(id -u)" -ne 0'
+command = "printf '>'"
+format = "[$output]($style) "
+style = "bold green"
+
+[custom.prompt_root]
+when = 'test "$(id -u)" -eq 0'
+command = "printf '#'"
+format = "[$output]($style) "
+style = "bold red"
+
+[status]
+disabled = false
+map_symbol = true
+format = "[$symbol$status]($style) "
