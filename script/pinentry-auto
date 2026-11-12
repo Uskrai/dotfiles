@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 set -eu
 
-# the agent runs under systemd; PINENTRY_USER_DATA is all it forwards.
-if [[ ${PINENTRY_USER_DATA-} == *ZELLIJ_SESSION_NAME=* ]]; then
+case ${PINENTRY_USER_DATA-} in
+*ZELLIJ_SESSION_NAME=*)
+	export ZELLIJ_SESSION_NAME="${PINENTRY_USER_DATA##*ZELLIJ_SESSION_NAME=}"
 	exec pinentry-zellij "$@"
-fi
+	;;
+esac
 
 exec pinentry-tty "$@"
